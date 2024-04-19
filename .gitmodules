@@ -1,0 +1,11 @@
+[submodule "raiko/src/taiko-mono"]
+	path = raiko/src/taiko-mono
+	url = https://github.com/taikoxyz/taiko-mono.git
+[submodule "raiko/src/raiko"]
+	path = raiko/src/raiko
+	url = https://github.com/taikoxyz/raiko
+	branch = taiko/alpha-7
+[submodule "node/src/simple-taiko-node"]
+	path = node/src/simple-taiko-node
+	url = https://github.com/taikoxyz/simple-taiko-node.git
+	branch = hekla
