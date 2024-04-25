@@ -5,23 +5,25 @@ set -e
 # clone repositories
 git submodule update --init
 
-# install dependencies
+# install docker
 curl https://get.docker.com | sh
+
+# install sgx and jq
 wget -qO- https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key | sudo tee /etc/apt/keyrings/intel-sgx-keyring.asc > /dev/null
 echo "deb [signed-by=/etc/apt/keyrings/intel-sgx-keyring.asc arch=amd64] https://download.01.org/intel-sgx/sgx_repo/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/intel-sgx.list
+apt install -y sgx-pck-id-retrieval-tool libsgx-epid jq -y
+
+# install node
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-apt install -y nodejs sgx-pck-id-retrieval-tool libsgx-epid jq -y
 npm install -g pnpm
+
+# install forge
 curl -L https://foundry.paradigm.xyz | bash
 export PATH="$PATH:/root/.foundry/bin"
 foundryup
 
-# get user input
-echo "API_KEY:" && read -r API_KEY
-echo "USER_TOKEN:" && read -r USER_TOKEN
-echo "ADMIN_TOKEN:" && read -r ADMIN_TOKEN
-
 # check platform
+echo "API_KEY:" && read -r API_KEY
 PCKIDRetrievalTool -f /tmp/pckid.csv
 pckid=$(cat /tmp/pckid.csv)
 rm /tmp/pckid.csv
@@ -43,6 +45,8 @@ openssl x509 -req -days 365 -in data/pccs/csr.pem -signkey data/pccs/private.pem
 rm -rf data/pccs/csr.pem
 
 # setup pccs config
+echo "USER_TOKEN:" && read -r USER_TOKEN
+echo "ADMIN_TOKEN:" && read -r ADMIN_TOKEN
 USER_TOKEN_HASH=$(echo -n "$USER_TOKEN" | sha512sum | tr -d '[:space:]-')
 ADMIN_TOKEN_HASH=$(echo -n "$ADMIN_TOKEN" | sha512sum | tr -d '[:space:]-')
 cp ./src/pccs/default.json ./data/pccs/default.json
