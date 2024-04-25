@@ -20,5 +20,5 @@ echo "$registration_process"
 cd ../../..
 
 # save SGX_INSTANCE_ID
-SGX_INSTANCE_ID=$(registration_process | grep -oP 'InstanceAdded\(id: \K\d+')
+SGX_INSTANCE_ID=$(echo "${registration_process}" | grep -oP 'InstanceAdded\(id: \K\d+')
 echo "SGX_INSTANCE_ID=$SGX_INSTANCE_ID" > .env
