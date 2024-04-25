@@ -20,7 +20,6 @@ foundryup
 echo "API_KEY:" && read -r API_KEY
 echo "USER_TOKEN:" && read -r USER_TOKEN
 echo "ADMIN_TOKEN:" && read -r ADMIN_TOKEN
-echo "PRIVATE_KEY:" && read -r PRIVATE_KEY
 
 # check platform
 PCKIDRetrievalTool -f /tmp/pckid.csv
@@ -32,7 +31,7 @@ pcesvn=$(echo "$pckid" | awk -F "," '{print $4}')
 pceid=$(echo "$pckid" | awk -F "," '{print $2}')
 fmspc=$(curl -v "https://api.trustedservices.intel.com/sgx/certification/v4/pckcert?encrypted_ppid=${ppid}&cpusvn=${cpusvn}&pcesvn=${pcesvn}&pceid=${pceid}" -H "Ocp-Apim-Subscription-Key:${API_KEY}" 2>&1 | grep -i "SGX-FMSPC: 00606A000000")
 if [[ -z "$fmspc" ]]; then
-  echo "PCK certificate retrieval failed"
+  echo "FMSPC not found or invalid ($fmspc)"
   exit 1
 fi
 
@@ -54,26 +53,3 @@ chmod 644 ./data/pccs/default.json
 
 # build
 docker compose build
-
-# init raiko
-docker compose run --rm raiko --init
-V3_QUOTE_BYTES=$(jq '.quote' < data/raiko/config/bootstrap.json)
-
-# register
-cd src/taiko-mono/packages/protocol
-pnpm install
-pnpm compile
-sed -i 's@export V3_QUOTE_BYTES@#export V3_QUOTE_BYTES@g' script/config_dcap_sgx_verifier.sh
-sed -i 's@https://any-holesky-rpc-url/@https://ethereum-holesky-rpc.publicnode.com@g' script/config_dcap_sgx_verifier.sh
-export V3_QUOTE_BYTES
-export PRIVATE_KEY
-registration_process=$(./script/config_dcap_sgx_verifier.sh)
-echo "$registration_process"
-cd ../../..
-
-# save SGX_INSTANCE_ID
-SGX_INSTANCE_ID=$(registration_process | grep -oP 'InstanceAdded\(id: \K\d+')
-echo "SGX_INSTANCE_ID=$SGX_INSTANCE_ID" > .env
-
-# start
-docker compose up -d
