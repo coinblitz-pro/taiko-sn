@@ -9,7 +9,7 @@ bootstrap_path="data/raiko/config/bootstrap.json"
 if [[ ! -f "$bootstrap_path" ]]; then
     docker compose run --rm raiko --init
 fi
-V3_QUOTE_BYTES=$(jq '.quote' < "$bootstrap_path")
+V3_QUOTE_BYTES=$(jq -r '.quote' < "$bootstrap_path")
 
 # register
 cd src/taiko-mono/packages/protocol
