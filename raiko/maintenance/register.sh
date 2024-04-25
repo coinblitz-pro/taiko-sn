@@ -5,8 +5,11 @@ set -e
 echo "PRIVATE_KEY:" && read -r PRIVATE_KEY
 
 # init raiko
-docker compose run --rm raiko --init
-V3_QUOTE_BYTES=$(jq '.quote' < data/raiko/config/bootstrap.json)
+bootstrap_path="data/raiko/config/bootstrap.json"
+if [[ ! -f "$bootstrap_path" ]]; then
+    docker compose run --rm raiko --init
+fi
+V3_QUOTE_BYTES=$(jq '.quote' < "$bootstrap_path")
 
 # register
 cd src/taiko-mono/packages/protocol
