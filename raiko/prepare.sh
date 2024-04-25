@@ -46,11 +46,11 @@ rm -rf data/pccs/csr.pem
 # setup pccs config
 USER_TOKEN_HASH=$(echo -n "$USER_TOKEN" | sha512sum | tr -d '[:space:]-')
 ADMIN_TOKEN_HASH=$(echo -n "$ADMIN_TOKEN" | sha512sum | tr -d '[:space:]-')
-cp src/pccs/default.json data/pccs/default.json
-sed -i "s/\$API_KEY/$API_KEY/g" data/pccs/default.json
-sed -i "s/\$USER_TOKEN_HASH/$USER_TOKEN_HASH/g" data/pccs/default.json
-sed -i "s/\$ADMIN_TOKEN_HASH/$ADMIN_TOKEN_HASH/g" data/pccs/default.json
-chmod 644 default.json
+cp ./src/pccs/default.json ./data/pccs/default.json
+sed -i "s/\$API_KEY/$API_KEY/g" ./data/pccs/default.json
+sed -i "s/\$USER_TOKEN_HASH/$USER_TOKEN_HASH/g" ./data/pccs/default.json
+sed -i "s/\$ADMIN_TOKEN_HASH/$ADMIN_TOKEN_HASH/g" ./data/pccs/default.json
+chmod 644 ./data/pccs/default.json
 
 # build
 docker compose build
