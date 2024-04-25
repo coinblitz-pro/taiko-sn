@@ -86,7 +86,7 @@ services:
     profiles:
       - prover
     labels:
-      reproxy.server: ${PROVER_HOST}
+      reproxy.server: ${PROVER_HOSTNAME}
       reproxy.port: "9876"
       reproxy.route: "^/(.*)"
       reproxy.dest: "/$$1"
