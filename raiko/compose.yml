@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     image: raiko:latest
     container_name: raiko
+    restart: unless-stopped
     command: --config-path=/etc/raiko/config.sgx.json
     devices:
       - "/dev/sgx_enclave:/dev/sgx_enclave"
@@ -25,6 +26,7 @@ services:
       context: ./src/raiko
       dockerfile: Dockerfile.pccs
     image: pccs
+    restart: unless-stopped
     container_name: pccs
     volumes:
       - ./data/pccs/default.json:/opt/intel/pccs/config/default.json
