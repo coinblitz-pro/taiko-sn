@@ -14,6 +14,7 @@ services:
       - ./data/taiko-geth:/data/taiko-geth
     ports:
       - "${PORT_L2_EXECUTION_ENGINE_METRICS}:6060"
+      - "${PORT_L2_EXECUTION_ENGINE_AUTH}:8551"
       - "${PORT_L2_EXECUTION_ENGINE_HTTP}:8545"
       - "${PORT_L2_EXECUTION_ENGINE_WS}:8546"
       - "${PORT_L2_EXECUTION_ENGINE_P2P}:${PORT_L2_EXECUTION_ENGINE_P2P}"
@@ -23,10 +24,8 @@ services:
       --networkid "${CHAIN_ID}"
       --gcmode archive
       --datadir /data/taiko-geth
-      --metrics 
-      --metrics.expensive
-      --metrics.addr "0.0.0.0"
       --bootnodes ${BOOT_NODES}
+      --authrpc.port 8551
       --authrpc.addr "0.0.0.0"
       --authrpc.vhosts "*"
       --http
@@ -39,6 +38,9 @@ services:
       --ws.origins "*"
       --port ${PORT_L2_EXECUTION_ENGINE_P2P}
       --discovery.port ${PORT_L2_EXECUTION_ENGINE_P2P}
+      --metrics 
+      --metrics.expensive
+      --metrics.addr "0.0.0.0"
     <<: *logging
     profiles:
       - l2_execution_engine
