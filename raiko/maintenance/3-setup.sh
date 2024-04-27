@@ -2,35 +2,22 @@
 
 set -e
 
-# check platform
-echo "API_KEY:" && read -r API_KEY
-PCKIDRetrievalTool -f /tmp/pckid.csv
-pckid=$(cat /tmp/pckid.csv)
-rm /tmp/pckid.csv
-ppid=$(echo "$pckid" | awk -F "," '{print $1}')
-cpusvn=$(echo "$pckid" | awk -F "," '{print $3}')
-pcesvn=$(echo "$pckid" | awk -F "," '{print $4}')
-pceid=$(echo "$pckid" | awk -F "," '{print $2}')
-fmspc=$(curl -v "https://api.trustedservices.intel.com/sgx/certification/v4/pckcert?encrypted_ppid=${ppid}&cpusvn=${cpusvn}&pcesvn=${pcesvn}&pceid=${pceid}" -H "Ocp-Apim-Subscription-Key:${API_KEY}" 2>&1 | grep -i "SGX-FMSPC: 00606A000000")
-if [[ -z "$fmspc" ]]; then
-  echo "FMSPC not found or invalid ($fmspc)"
-  exit 1
-fi
-
-# setup pccs certificate
 openssl genrsa -out data/pccs/private.pem 2048
 chmod 644 data/pccs/private.pem
 openssl req -new -key data/pccs/private.pem -out data/pccs/csr.pem
 openssl x509 -req -days 365 -in data/pccs/csr.pem -signkey data/pccs/private.pem -out data/pccs/file.crt
 rm -rf data/pccs/csr.pem
 
-# setup pccs config
-echo "USER_TOKEN:" && read -r USER_TOKEN
-echo "ADMIN_TOKEN:" && read -r ADMIN_TOKEN
-USER_TOKEN_HASH=$(echo -n "$USER_TOKEN" | sha512sum | tr -d '[:space:]-')
-ADMIN_TOKEN_HASH=$(echo -n "$ADMIN_TOKEN" | sha512sum | tr -d '[:space:]-')
 cp ./src/pccs/default.json ./data/pccs/default.json
-sed -i "s/\$API_KEY/$API_KEY/g" ./data/pccs/default.json
-sed -i "s/\$USER_TOKEN_HASH/$USER_TOKEN_HASH/g" ./data/pccs/default.json
-sed -i "s/\$ADMIN_TOKEN_HASH/$ADMIN_TOKEN_HASH/g" ./data/pccs/default.json
 chmod 644 ./data/pccs/default.json
+
+echo "API_KEY:" && read -r API_KEY
+if [[ -z "$API_KEY" ]]; then
+  sed -i "s/\$API_KEY/$API_KEY/g" ./data/pccs/default.json
+fi
+
+echo "ADMIN_TOKEN:" && read -r ADMIN_TOKEN
+sed -i "s/\$ADMIN_TOKEN_HASH/$(echo -n "$ADMIN_TOKEN" | sha512sum | tr -d '[:space:]-')/g" ./data/pccs/default.json
+
+echo "USER_TOKEN:" && read -r USER_TOKEN
+sed -i "s/\$USER_TOKEN_HASH/$(echo -n "$USER_TOKEN" | sha512sum | tr -d '[:space:]-')/g" ./data/pccs/default.json
