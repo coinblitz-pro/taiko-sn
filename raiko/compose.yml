@@ -3,7 +3,7 @@ services:
     build:
       context: ./src/raiko
       dockerfile: Dockerfile
-    image: raiko:latest
+    image: lagunovsky/raiko:${RAIKO_VERSION:-latest}
     container_name: raiko
     restart: unless-stopped
     command: --config-path=/etc/raiko/config.sgx.json
@@ -25,7 +25,7 @@ services:
     build:
       context: ./src/raiko
       dockerfile: Dockerfile.pccs
-    image: pccs
+    image: lagunovsky/pccs:${PCCS_VERSION:-latest}
     restart: unless-stopped
     container_name: pccs
     volumes:
