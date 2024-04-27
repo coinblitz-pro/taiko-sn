@@ -18,15 +18,9 @@ else
 fi
 
 apt update && apt install -y \
-    sgx-aesm-service \
-    libsgx-aesm-launch-plugin \
-    libsgx-aesm-epid-plugin \
-    libsgx-aesm-quote-ex-plugin \
-    libsgx-aesm-ecdsa-plugin \
-    libsgx-dcap-quote-verify \
-    libsgx-dcap-default-qpl \
-    sgx-pck-id-retrieval-tool \
-    jq
+  sgx-pck-id-retrieval-tool \
+  libsgx-dcap-default-qpl \
+  jq
 
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 apt update && apt install nodejs -y
