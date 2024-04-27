@@ -17,7 +17,7 @@ if [[ ! -f "$config_path" ]]; then
   chmod 644 ${config_path}
 
   read -r -e -p "API_KEY: " -i "${API_KEY}" API_KEY
-  if [[ -z "$API_KEY" ]]; then
+  if [[ -n "$API_KEY" ]]; then
     sed -i "s/\$API_KEY/$API_KEY/g" ${config_path}
   fi
 
