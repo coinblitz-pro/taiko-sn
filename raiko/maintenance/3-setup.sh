@@ -27,5 +27,5 @@ if [[ ! -f "$config_path" ]]; then
 
   read -r -e -p "USER_TOKEN: " -i "$(openssl rand -hex 24)" USER_TOKEN
   sed -i "s/\$USER_TOKEN_HASH/$(echo -n "$USER_TOKEN" | sha512sum | tr -d '[:space:]-')/g" ${config_path}
-  echo "USER_TOKEN_HASH=$USER_TOKEN_HASH" >> .env
+  echo "USER_TOKEN=$USER_TOKEN" >> .env
 fi
