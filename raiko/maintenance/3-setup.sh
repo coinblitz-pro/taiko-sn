@@ -18,6 +18,8 @@ fi
 
 read -r -e -p "ADMIN_TOKEN: " -i "$(openssl rand -hex 24)" ADMIN_TOKEN
 sed -i "s/\$ADMIN_TOKEN_HASH/$(echo -n "$ADMIN_TOKEN" | sha512sum | tr -d '[:space:]-')/g" ./data/pccs/default.json
+echo "ADMIN_TOKEN=$ADMIN_TOKEN" >> .env
 
 read -r -e -p "USER_TOKEN: " -i "$(openssl rand -hex 24)" USER_TOKEN
 sed -i "s/\$USER_TOKEN_HASH/$(echo -n "$USER_TOKEN" | sha512sum | tr -d '[:space:]-')/g" ./data/pccs/default.json
+echo "USER_TOKEN_HASH=$USER_TOKEN_HASH" >> .env
