@@ -4,7 +4,6 @@ services:
       context: ./src/raiko
       dockerfile: Dockerfile
     image: lagunovsky/raiko:${RAIKO_VERSION:-latest}
-    container_name: raiko
     restart: unless-stopped
     command: --config-path=/etc/raiko/config.sgx.json
     devices:
@@ -27,7 +26,6 @@ services:
       dockerfile: Dockerfile.pccs
     image: lagunovsky/pccs:${PCCS_VERSION:-latest}
     restart: unless-stopped
-    container_name: pccs
     volumes:
       - ./data/pccs/default.json:/opt/intel/pccs/config/default.json
       - ./data/pccs/file.crt:/opt/intel/pccs/ssl_key/file.crt
