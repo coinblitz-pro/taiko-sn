@@ -12,16 +12,18 @@ read -r -e -p "PRIVATE_KEY: " -i "${PRIVATE_KEY}" PRIVATE_KEY
 cd src/taiko-mono/packages/protocol
 pnpm install
 pnpm compile
-registration_process=$(PRIVATE_KEY=${PRIVATE_KEY} FORK_URL=https://ethereum-holesky-rpc.publicnode.com ./script/config_dcap_sgx_verifier.sh --quote "${V3_QUOTE_BYTES}")
+
+if ! registration_process=$(PRIVATE_KEY=${PRIVATE_KEY} FORK_URL=https://ethereum-holesky-rpc.publicnode.com ./script/config_dcap_sgx_verifier.sh --quote "${V3_QUOTE_BYTES}")
+then
+  echo "$registration_process"
+  echo "Failed to register SGX instance"
+  exit 1
+fi
+
 echo "$registration_process"
 cd ../../..
 
 SGX_INSTANCE_ID=$(echo "${registration_process}" | grep -oP 'InstanceAdded\(id: \K\d+')
-
-if [[ -z "$SGX_INSTANCE_ID" ]]; then
-    echo "Failed to register SGX instance"
-    exit 1
-fi
 
 echo "RAIKO_SGX_INSTANCE_ID=$SGX_INSTANCE_ID" >> .env
 echo "Registered SGX instance with ID: $SGX_INSTANCE_ID"
