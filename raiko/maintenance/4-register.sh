@@ -2,6 +2,8 @@
 
 set -e
 
+export PATH="$PATH:~/.foundry/bin"
+
 echo "PRIVATE_KEY:" && read -r PRIVATE_KEY
 
 # init raiko
