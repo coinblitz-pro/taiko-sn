@@ -2,26 +2,6 @@
 
 set -e
 
-# clone repositories
-git submodule update --init
-
-# install docker
-curl https://get.docker.com | sh
-
-# install sgx and jq
-wget -qO- https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key | sudo tee /etc/apt/keyrings/intel-sgx-keyring.asc > /dev/null
-echo "deb [signed-by=/etc/apt/keyrings/intel-sgx-keyring.asc arch=amd64] https://download.01.org/intel-sgx/sgx_repo/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/intel-sgx.list
-apt install -y sgx-pck-id-retrieval-tool libsgx-epid jq -y
-
-# install node
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-npm install -g pnpm
-
-# install forge
-curl -L https://foundry.paradigm.xyz | bash
-export PATH="$PATH:/root/.foundry/bin"
-foundryup
-
 # check platform
 echo "API_KEY:" && read -r API_KEY
 PCKIDRetrievalTool -f /tmp/pckid.csv
@@ -54,6 +34,3 @@ sed -i "s/\$API_KEY/$API_KEY/g" ./data/pccs/default.json
 sed -i "s/\$USER_TOKEN_HASH/$USER_TOKEN_HASH/g" ./data/pccs/default.json
 sed -i "s/\$ADMIN_TOKEN_HASH/$ADMIN_TOKEN_HASH/g" ./data/pccs/default.json
 chmod 644 ./data/pccs/default.json
-
-# build
-docker compose build
