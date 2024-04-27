@@ -16,7 +16,7 @@ if [[ ! -f "$config_path" ]]; then
   cp ./src/pccs/default.json ${config_path}
   chmod 644 ${config_path}
 
-  echo "API_KEY:" && read -r API_KEY
+  read -r -e -p "API_KEY: " -i "${API_KEY}" API_KEY
   if [[ -z "$API_KEY" ]]; then
     sed -i "s/\$API_KEY/$API_KEY/g" ${config_path}
   fi
