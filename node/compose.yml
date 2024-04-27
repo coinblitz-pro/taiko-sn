@@ -43,7 +43,7 @@ services:
       --metrics.addr "0.0.0.0"
     <<: *logging
     profiles:
-      - l2_execution_engine
+      - engine
       - prover
       - proposer
 
@@ -64,7 +64,7 @@ services:
       - "/script/start-driver.sh"
     <<: *logging
     profiles:
-      - l2_execution_engine
+      - engine
       - prover
       - proposer
 
