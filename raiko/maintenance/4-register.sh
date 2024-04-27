@@ -19,4 +19,4 @@ echo "$registration_process"
 cd ../../..
 
 SGX_INSTANCE_ID=$(echo "${registration_process}" | grep -oP 'InstanceAdded\(id: \K\d+')
-echo "SGX_INSTANCE_ID=$SGX_INSTANCE_ID" >> .env
+echo "RAIKO_SGX_INSTANCE_ID=$SGX_INSTANCE_ID" >> .env
