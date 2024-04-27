@@ -2,8 +2,6 @@
 
 set -e
 
-export PATH="$PATH:~/.foundry/bin"
-
 bootstrap_path="data/raiko/config/bootstrap.json"
 if [[ ! -f "$bootstrap_path" ]]; then
     docker compose run --rm raiko --init
@@ -19,6 +17,11 @@ echo "$registration_process"
 cd ../../..
 
 SGX_INSTANCE_ID=$(echo "${registration_process}" | grep -oP 'InstanceAdded\(id: \K\d+')
-echo "RAIKO_SGX_INSTANCE_ID=$SGX_INSTANCE_ID" >> .env
 
+if [[ -z "$SGX_INSTANCE_ID" ]]; then
+    echo "Failed to register SGX instance"
+    exit 1
+fi
+
+echo "RAIKO_SGX_INSTANCE_ID=$SGX_INSTANCE_ID" >> .env
 echo "Registered SGX instance with ID: $SGX_INSTANCE_ID"
