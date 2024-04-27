@@ -10,7 +10,7 @@ if [[ ! -f "$bootstrap_path" ]]; then
 fi
 V3_QUOTE_BYTES=$(jq -r '.quote' < "$bootstrap_path")
 
-echo "PRIVATE_KEY:" && read -r PRIVATE_KEY
+read -r -e -p "PRIVATE_KEY: " -i "${PRIVATE_KEY}" PRIVATE_KEY
 cd src/taiko-mono/packages/protocol
 pnpm install
 pnpm compile
