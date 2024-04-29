@@ -123,7 +123,7 @@ services:
     environment:
       - TZ=Europe/Warsaw
       - SSL_TYPE=auto
-      - SSL_ACME_FQDN=whoami.lagunovsky.com
+      - SSL_ACME_FQDN=*
       - SSL_ACME_EMAIL=ivan.lagunovsky@gmail.com
       - SSL_ACME_LOCATION=/srv/var/ssl
       - DOCKER_ENABLED=true
