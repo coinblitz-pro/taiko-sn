@@ -87,11 +87,6 @@ services:
       - "/script/start-prover-relayer.sh"
     profiles:
       - prover
-    labels:
-      reproxy.server: ${PROVER_HOSTNAME}
-      reproxy.port: "9876"
-      reproxy.route: "^/(.*)"
-      reproxy.dest: "/$$1"
     <<: *logging
 
   taiko_client_proposer:
@@ -112,31 +107,6 @@ services:
       - "/script/start-proposer.sh"
     profiles:
       - proposer
-    <<: *logging
-
-  reproxy:
-    image: umputun/reproxy:${REPROXY_VERSION:-latest}
-    restart: unless-stopped
-    ports:
-      - "80:8080"
-      - "443:8443"
-    environment:
-      - TZ=Europe/Warsaw
-      - SSL_TYPE=auto
-      - SSL_ACME_FQDN=*
-      - SSL_ACME_EMAIL=ivan.lagunovsky@gmail.com
-      - SSL_ACME_LOCATION=/srv/var/ssl
-      - DOCKER_ENABLED=true
-      - GZIP=true
-      - LOGGER_ENABLED=true
-      - LOGGER_STDOUT=true
-      - ASSETS_CACHE=30d,text/html:30s
-      - DEBUG=true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./data/ssl:/srv/var/ssl
-    profiles:
-      - reproxy
     <<: *logging
 
   prometheus:
