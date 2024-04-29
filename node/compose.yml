@@ -38,7 +38,7 @@ services:
       --ws.origins "*"
       --port ${PORT_L2_EXECUTION_ENGINE_P2P}
       --discovery.port ${PORT_L2_EXECUTION_ENGINE_P2P}
-      --metrics 
+      --metrics
       --metrics.expensive
       --metrics.addr "0.0.0.0"
     <<: *logging
@@ -117,8 +117,6 @@ services:
   reproxy:
     image: umputun/reproxy:${REPROXY_VERSION:-latest}
     restart: unless-stopped
-    networks:
-      - reproxy
     ports:
       - "80:8080"
       - "443:8443"
@@ -129,7 +127,6 @@ services:
       - SSL_ACME_EMAIL=ivan.lagunovsky@gmail.com
       - SSL_ACME_LOCATION=/srv/var/ssl
       - DOCKER_ENABLED=true
-      - DOCKER_NETWORK=reproxy
       - GZIP=true
       - LOGGER_ENABLED=true
       - LOGGER_STDOUT=true
