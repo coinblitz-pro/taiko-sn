@@ -22,7 +22,8 @@ services:
     command: |
       --taiko
       --networkid "${CHAIN_ID}"
-      --gcmode archive
+      --gcmode ${GCMODE:-archive}
+      --syncmode ${SYNCMODE:-snap}
       --datadir /data/taiko-geth
       --bootnodes ${BOOT_NODES}
       --authrpc.port 8551
