@@ -2,6 +2,15 @@
 
 set -e
 
+if [[ ! -f ".env" ]]; then
+  cp .env.example .env
+  echo "Available container versions: DC4sv2"
+  read -r -e -p "RAIKO_VERSION: " -i "DC4sv2" RAIKO_VERSION
+  sed -i "s/RAIKO_VERSION=/RAIKO_VERSION=$RAIKO_VERSION/g" .env
+  read -r -e -p "PCCS_VERSION: " -i "DC4sv2" PCCS_VERSION
+  sed -i "s/PCCS_VERSION=/PCCS_VERSION=$PCCS_VERSION/g" .env
+fi
+
 crt_path="data/pccs/file.crt"
 if [[ ! -f "$crt_path" ]]; then
   openssl genrsa -out data/pccs/private.pem 2048
