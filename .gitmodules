@@ -4,7 +4,7 @@
 [submodule "raiko/src/raiko"]
 	path = raiko/src/raiko
 	url = https://github.com/taikoxyz/raiko
-	branch = taiko/alpha-7
+	branch = taiko/unstable
 [submodule "node/src/simple-taiko-node"]
 	path = node/src/simple-taiko-node
 	url = https://github.com/taikoxyz/simple-taiko-node.git
