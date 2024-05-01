@@ -9,3 +9,7 @@
 	path = node/src/simple-taiko-node
 	url = https://github.com/taikoxyz/simple-taiko-node.git
 	branch = hekla
+[submodule "light/upstream/taiko-client"]
+	path = light/upstream/taiko-client
+	url = git@github.com:coinblitz-pro/taiko-client.git
+	branch = hekla

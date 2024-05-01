@@ -1,0 +1,58 @@
+x-logging: &logging
+  logging:
+    driver: local
+    options:
+      max-size: 10m
+      max-file: "5"
+
+services:
+  raiko:
+    image: lagunovsky/raiko:DC4sv2
+    restart: unless-stopped
+    command: --config-path=/etc/raiko/config.sgx.json
+    devices:
+      - "/dev/sgx_enclave:/dev/sgx_enclave"
+      - "/dev/sgx_provision:/dev/sgx_provision"
+    volumes:
+      - /var/log/raiko:/var/log/raiko
+      - ./data/gramine:/root/.config/gramine
+      - ./data/raiko:/root/.config/raiko
+    environment:
+      - SGX_DIRECT=${SGX_DIRECT:-0}
+      - SGX_INSTANCE_ID=${RAIKO_SGX_INSTANCE_ID}
+    depends_on:
+      - pccs
+    <<: *logging
+
+  pccs:
+    image: lagunovsky/pccs:DC4sv2
+    restart: unless-stopped
+    volumes:
+      - ./data/pccs/default.json:/opt/intel/pccs/config/default.json
+      - ./data/pccs/file.crt:/opt/intel/pccs/ssl_key/file.crt
+      - ./data/pccs/private.pem:/opt/intel/pccs/ssl_key/private.pem
+    <<: *logging
+
+  prover:
+    image: lagunovsky/taiko-client:hekla-prover
+    restart: unless-stopped
+    depends_on:
+      - pccs
+    <<: *logging
+
+  proposer-private:
+    image: lagunovsky/taiko-client:hekla-proposer
+    restart: unless-stopped
+    environment:
+      - PROVER_ENDPOINTS=http://prover:9876
+    <<: *logging
+
+  proposer-public:
+    image: lagunovsky/taiko-client:hekla-proposer
+    restart: unless-stopped
+    environment:
+      - PROVER_ENDPOINTS=${PROPOSER_PUBLIC_PROVER_ENDPOINTS}
+      - PROPOSER_EPOCH_INTERVAL=1s
+    <<: *logging
+
+
