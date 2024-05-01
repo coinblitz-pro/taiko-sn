@@ -21,7 +21,7 @@ then
 fi
 
 echo "$registration_process"
-cd ../../..
+cd -
 
 SGX_INSTANCE_ID=$(echo "${registration_process}" | grep -oP -m 1 'InstanceAdded\(id: \K\d+')
 
