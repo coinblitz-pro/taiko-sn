@@ -2,9 +2,6 @@
 
 set -e
 
-git submodule update --init upstream/taiko-mono && sleep 1
-git submodule update --init upstream/raiko && sleep 1
-
 curl https://get.docker.com | sh
 usermod -aG docker "$USER"
 
