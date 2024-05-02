@@ -8,14 +8,25 @@ if [ ! -d "upstream/taiko-mono" ]; then
   git submodule update --init upstream/simple-taiko-node
 fi
 
-if [ "$1" == "prepare" ]; then
+action=${1:-help}
+
+if [ "${action}" == "help" ]; then
+  echo "Usage: $0 <action>"
+  echo "Actions:"
+  echo "  prepare: Prepare the environment for running Raiko"
+  echo "  light.setup: Setup a light node"
+  echo "  raiko.setup: Setup a Raiko node"
+  exit 0
+fi
+
+if [ "${action}" == "prepare" ]; then
   sudo nodes/raiko/maintenance/raiko.prepare.sh
 fi
 
-if [ "$1" == "light.setup" ]; then
+if [ "${action}" == "light.setup" ]; then
   maintenance/light.setup.sh
 fi
 
-if [ "$1" == "raiko.setup" ]; then
+if [ "${action}" == "raiko.setup" ]; then
   maintenance/light-node.setup.sh
 fi
