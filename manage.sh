@@ -9,20 +9,21 @@ action=${1:-help}
 if [ "${action}" == "help" ]; then
   echo "Usage: $0 <action>"
   echo "Actions:"
-  echo "  prepare: Prepare the environment for running Raiko"
-  echo "  light.setup: Setup a light node"
-  echo "  raiko.setup: Setup a Raiko node"
+  echo "  raiko.prepare   Prepare the environment for running Raiko"
+  echo "  raiko.setup     Setup a Raiko node"
+  echo "  light.setup     Setup a light node"
+  echo "  light.up        Start a light node"
   exit 0
 fi
 
 if [ "${action}" == "raiko.prepare" ]; then
   nodes/raiko/scripts/prepare.sh
-fi
-
-if [ "${action}" == "raiko.setup" ]; then
+elif [ "${action}" == "raiko.setup" ]; then
   scripts/light-node.setup.sh
 fi
 
 if [ "${action}" == "light.setup" ]; then
   scripts/light.setup.sh
+elif [ "${action}" == "light.up" ]; then
+  scripts/light.up.sh
 fi
