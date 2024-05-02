@@ -9,9 +9,11 @@ upstream="$location/../../../upstream"
 if [[ ! -f "${destination}/.env" ]]; then
   cp "${destination}/.env.example" "${destination}/.env"
   echo "Available container versions: DC4sv2"
-  read -r -e -p "RAIKO_VERSION: " -i "DC4sv2" RAIKO_VERSION
+  preferred=""
+  if [[ $USER == "azureuser" ]]; then preferred="DC4sv2"; fi
+  read -r -e -p "RAIKO_VERSION: " -i "${preferred}" RAIKO_VERSION
   sed -i "s/RAIKO_VERSION=/RAIKO_VERSION=$RAIKO_VERSION/g" "${destination}/.env"
-  read -r -e -p "PCCS_VERSION: " -i "DC4sv2" PCCS_VERSION
+  read -r -e -p "PCCS_VERSION: " -i "${preferred}" PCCS_VERSION
   sed -i "s/PCCS_VERSION=/PCCS_VERSION=$PCCS_VERSION/g" "${destination}/.env"
 fi
 
