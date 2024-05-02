@@ -2,11 +2,9 @@
 
 set -eu -o pipefail
 
-if [ ! -d "upstream/taiko-mono" ]; then
-  git submodule update --init upstream/taiko-mono && sleep 0.25
-  git submodule update --init upstream/raiko && sleep 0.25
-  git submodule update --init upstream/simple-taiko-node
-fi
+if [ ! -d "upstream/taiko-mono" ]; then git submodule update --init upstream/taiko-mono && sleep 0.5; fi
+if [ ! -d "upstream/raiko" ]; then git submodule update --init upstream/raiko && sleep 0.5; fi
+if [ ! -d "upstream/simple-taiko-node" ];then git submodule update --init upstream/simple-taiko-node && sleep 1; fi
 
 action=${1:-help}
 
