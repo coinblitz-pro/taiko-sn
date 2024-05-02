@@ -19,7 +19,7 @@ else
   echo "Unsupported Ubuntu version: $ubuntu_version"
 fi
 
-apt update && apt install -y \
+apt update && apt upgrade -y && apt install -y \
   sgx-pck-id-retrieval-tool \
   libsgx-dcap-default-qpl \
   jq
