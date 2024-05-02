@@ -30,4 +30,4 @@ npm install -g pnpm
 
 curl -L https://foundry.paradigm.xyz | bash
 ~/.foundry/bin/foundryup
-ln -s ~/.foundry/bin/forge /usr/bin/forge
+ln -f -s ~/.foundry/bin/forge /usr/bin/forge
