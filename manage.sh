@@ -19,14 +19,14 @@ if [ "${action}" == "help" ]; then
   exit 0
 fi
 
-if [ "${action}" == "prepare" ]; then
-  sudo nodes/raiko/scripts/prepare.sh
-fi
-
-if [ "${action}" == "light.setup" ]; then
-  scripts/light.setup.sh
+if [ "${action}" == "raiko.prepare" ]; then
+  nodes/raiko/scripts/prepare.sh
 fi
 
 if [ "${action}" == "raiko.setup" ]; then
   scripts/light-node.setup.sh
+fi
+
+if [ "${action}" == "light.setup" ]; then
+  scripts/light.setup.sh
 fi
