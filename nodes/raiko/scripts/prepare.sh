@@ -2,11 +2,6 @@
 
 set -e
 
-if ! command -v docker > /dev/null 2>&1; then
-  curl https://get.docker.com | sh
-  usermod -aG docker "$USER"
-fi
-
 if ! command -v jq > /dev/null 2>&1; then
   ubuntu_version=$(lsb_release -rs)
   if [ "$ubuntu_version" == "22.04" ]; then
@@ -30,4 +25,12 @@ if ! command -v forge > /dev/null 2>&1; then
   curl -L https://foundry.paradigm.xyz | sudo bash
   sudo ~/.foundry/bin/foundryup
   sudo ln -f -s ~/.foundry/bin/forge /usr/local/bin/forge
+fi
+
+if ! command -v docker > /dev/null 2>&1; then
+  curl https://get.docker.com | sh
+  if [[ $USER != "root" ]]; then
+    usermod -aG docker "$USER"
+    echo "You need logging out and back in again"
+  fi
 fi
