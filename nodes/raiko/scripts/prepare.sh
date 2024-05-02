@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 if ! command -v jq > /dev/null 2>&1; then
   ubuntu_version=$(lsb_release -rs)
   if [ "$ubuntu_version" == "22.04" ]; then
@@ -22,8 +20,8 @@ if ! command -v node > /dev/null 2>&1; then
 fi
 
 if ! command -v forge > /dev/null 2>&1; then
-  curl -L https://foundry.paradigm.xyz | sudo bash
-  sudo ~/.foundry/bin/foundryup
+  curl -L https://foundry.paradigm.xyz | bash
+  ~/.foundry/bin/foundryup
   sudo ln -f -s ~/.foundry/bin/forge /usr/local/bin/forge
 fi
 

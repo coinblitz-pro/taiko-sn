@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 location=$(dirname "$(realpath "$0")")
 destination="${1:-.}"
 upstream="$location/../../../upstream"
@@ -28,7 +26,7 @@ fi
 echo "$registration_process"
 cd -
 
-SGX_INSTANCE_ID=$(echo "${registration_process}" | grep -oP -m 1 'InstanceAdded\(id: \K\d+')
+SGX_INSTANCE_ID=$(echo "${registration_process}" | grep -oP -m 1 'register sgx instance index: \K\d+')
 
 echo "Registered SGX instance with ID: $SGX_INSTANCE_ID"
 sed -i "s/RAIKO_SGX_INSTANCE_ID=/RAIKO_SGX_INSTANCE_ID=$SGX_INSTANCE_ID/g" "${destination}/.env"

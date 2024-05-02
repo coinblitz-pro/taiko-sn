@@ -1,10 +1,8 @@
 #!/bin/bash
 
-set -eu -o pipefail
-
-git submodule update --init upstream/taiko-mono && sleep 0.5
-git submodule update --init upstream/raiko && sleep 0.5
-git submodule update --init upstream/simple-taiko-node && sleep 1
+git submodule update --init upstream/taiko-mono && sleep 0.2
+git submodule update --init upstream/raiko && sleep 0.2
+git submodule update --init upstream/simple-taiko-node && sleep 0.2
 
 action=${1:-help}
 

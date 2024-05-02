@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 read -r -e -p "API_KEY: " -i "${API_KEY}" API_KEY
 PCKIDRetrievalTool -f /tmp/pckid.csv
 

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 location=$(dirname "$(realpath "$0")")
 destination="${1:-.}"
 upstream="$location/../../../upstream"
