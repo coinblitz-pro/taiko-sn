@@ -2,6 +2,8 @@
 
 set -e
 
+DIR=$(dirname "$(realpath "$0")")
+
 if [[ ! -f "./.env" ]]; then
   cp .env.example .env
   echo "Available container versions: DC4sv2"
@@ -22,7 +24,6 @@ fi
 
 config_path="data/pccs/default.json"
 if [[ ! -f "$config_path" ]]; then
-  DIR=$(dirname "$(realpath "$0")")
   cp "$DIR/../../../upstream/raiko/docker/pccs-defaut-example.json" ${config_path}
   chmod 644 ${config_path}
 
