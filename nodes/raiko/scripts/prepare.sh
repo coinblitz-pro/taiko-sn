@@ -2,12 +2,12 @@
 
 set -e
 
-if ! command -v docker &> /dev/null; then
+if ! command -v docker > /dev/null 2>&1; then
   curl https://get.docker.com | sh
   usermod -aG docker "$USER"
 fi
 
-if ! command -v jq &> /dev/null; then
+if ! command -v jq > /dev/null 2>&1; then
   ubuntu_version=$(lsb_release -rs)
   if [ "$ubuntu_version" == "20.04" ]; then
     curl -fsSLo /usr/share/keyrings/intel-sgx-deb.key https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key
@@ -22,13 +22,13 @@ if ! command -v jq &> /dev/null; then
   apt update && apt apt install -y sgx-pck-id-retrieval-tool libsgx-dcap-default-qpl jq
 fi
 
-if ! command -v node &> /dev/null; then
+if ! command -v node > /dev/null 2>&1; then
   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
   apt update && apt install nodejs -y
   npm install -g pnpm
 fi
 
-if ! command -v forge &> /dev/null; then
+if ! command -v forge > /dev/null 2>&1; then
   curl -L https://foundry.paradigm.xyz | bash
   ~/.foundry/bin/foundryup
   ln -f -s ~/.foundry/bin/forge /usr/bin/forge
