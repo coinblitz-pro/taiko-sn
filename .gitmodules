@@ -1,15 +1,14 @@
-[submodule "raiko/src/taiko-mono"]
-	path = raiko/src/taiko-mono
+[submodule "upstream/taiko-mono"]
+	path = upstream/taiko-mono
 	url = https://github.com/taikoxyz/taiko-mono.git
-[submodule "raiko/src/raiko"]
-	path = raiko/src/raiko
+[submodule "upstream/raiko"]
+	path = upstream/raiko
 	url = https://github.com/taikoxyz/raiko
 	branch = taiko/unstable
-[submodule "node/src/simple-taiko-node"]
-	path = node/src/simple-taiko-node
+[submodule "upstream/simple-taiko-node"]
+	path = upstream/simple-taiko-node
 	url = https://github.com/taikoxyz/simple-taiko-node.git
-	branch = hekla
-[submodule "light/upstream/taiko-client"]
-	path = light/upstream/taiko-client
+[submodule "upstream/taiko-client"]
+	path = upstream/taiko-client
 	url = git@github.com:coinblitz-pro/taiko-client.git
 	branch = hekla
