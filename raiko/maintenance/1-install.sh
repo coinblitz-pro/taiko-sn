@@ -2,7 +2,8 @@
 
 set -e
 
-git submodule update --init
+git submodule update --init raiko/src/taiko-mono && sleep 1
+git submodule update --init raiko/src/raiko && sleep 1
 
 curl https://get.docker.com | sh
 
