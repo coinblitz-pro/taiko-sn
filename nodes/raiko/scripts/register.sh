@@ -8,7 +8,7 @@ upstream="$location/../../../upstream"
 
 bootstrap_path="${destination}/data/raiko/config/bootstrap.json"
 if [[ ! -f "$bootstrap_path" ]]; then
-    docker compose run --rm raiko --init
+    docker compose run --project-directory "${destination}" --rm raiko --init
 fi
 V3_QUOTE_BYTES=$(jq -r '.quote' < "$bootstrap_path")
 
