@@ -12,7 +12,7 @@ fi
 V3_QUOTE_BYTES=$(jq -r '.quote' < "$bootstrap_path")
 
 read -r -e -p "PRIVATE_KEY: " -i "${PRIVATE_KEY}" PRIVATE_KEY
-cd "$location/../upstream/taiko-mono/packages/protocol"
+cd "$location/../../upstream/taiko-mono/packages/protocol"
 
 pnpm install
 pnpm compile

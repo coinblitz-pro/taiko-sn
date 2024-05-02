@@ -25,7 +25,7 @@ fi
 
 config_path="${destination}/data/pccs/default.json"
 if [[ ! -f "$config_path" ]]; then
-  cp "$location/../upstream/raiko/docker/pccs-defaut-example.json" "${config_path}"
+  cp "$location/../../upstream/raiko/docker/pccs-defaut-example.json" "${config_path}"
   chmod 644 "${config_path}"
 
   read -r -e -p "API_KEY: " -i "${API_KEY}" API_KEY
