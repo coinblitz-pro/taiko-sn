@@ -36,9 +36,9 @@ if [[ ! -f "$config_path" ]]; then
 
   read -r -e -p "ADMIN_TOKEN: " -i "$(openssl rand -hex 24)" ADMIN_TOKEN
   sed -i "s/\YOUR_USER_TOKEN_HASH/$(echo -n "$ADMIN_TOKEN" | sha512sum | tr -d '[:space:]-')/g" "${config_path}"
-  echo "ADMIN_TOKEN=$ADMIN_TOKEN" >> .env
+  echo "ADMIN_TOKEN=$ADMIN_TOKEN" >> "${destination}/.env"
 
   read -r -e -p "USER_TOKEN: " -i "$(openssl rand -hex 24)" USER_TOKEN
   sed -i "s/\YOUR_ADMIN_TOKEN_HASH/$(echo -n "$USER_TOKEN" | sha512sum | tr -d '[:space:]-')/g" "${config_path}"
-  echo "USER_TOKEN=$USER_TOKEN" >> .env
+  echo "USER_TOKEN=$USER_TOKEN" >> "${destination}/.env"
 fi
