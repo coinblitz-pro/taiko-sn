@@ -14,5 +14,5 @@ sed -i "s@L2_ENDPOINT_AUTH=@L2_ENDPOINT_AUTH=${L2_ENDPOINT_AUTH}@g" "${path}/.en
 sed -i "s@L2_JWT_SECRET=@L2_JWT_SECRET=${L2_JWT_SECRET}@g" "${path}/.env"
 sed -i "s@PROPOSER_PUBLIC_PROVER_ENDPOINTS=@PROPOSER_PUBLIC_PROVER_ENDPOINTS=${PROPOSER_PUBLIC_PROVER_ENDPOINTS}/@g" "${path}/.env"
 
-nodes/raiko/maintenance/configure.sh ${path}
-nodes/raiko/maintenance/register.sh ${path}
+nodes/raiko/scripts/configure.sh ${path}
+nodes/raiko/scripts/register.sh ${path}

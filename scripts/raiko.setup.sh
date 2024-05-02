@@ -2,5 +2,5 @@
 
 path="nodes/raiko"
 
-nodes/raiko/maintenance/configure.sh ${path}
-nodes/raiko/maintenance/register.sh ${path}
+nodes/raiko/scripts/configure.sh ${path}
+nodes/raiko/scripts/register.sh ${path}
