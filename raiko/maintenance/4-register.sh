@@ -2,7 +2,7 @@
 
 set -e
 
-bootstrap_path="data/raiko/config/bootstrap.json"
+bootstrap_path="./data/raiko/config/bootstrap.json"
 if [[ ! -f "$bootstrap_path" ]]; then
     docker compose run --rm raiko --init
 fi
