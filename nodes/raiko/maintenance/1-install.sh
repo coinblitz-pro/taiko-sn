@@ -6,6 +6,7 @@ git submodule update --init upstream/taiko-mono && sleep 1
 git submodule update --init upstream/raiko && sleep 1
 
 curl https://get.docker.com | sh
+usermod -aG docker "$USER"
 
 ubuntu_version=$(lsb_release -rs)
 if [ "$ubuntu_version" == "20.04" ]; then
