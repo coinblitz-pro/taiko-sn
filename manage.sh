@@ -20,7 +20,7 @@ if [ "${action}" == "help" ]; then
 fi
 
 if [ "${action}" == "prepare" ]; then
-  sudo nodes/raiko/scripts/raiko.prepare.sh
+  sudo nodes/raiko/scripts/prepare.sh
 fi
 
 if [ "${action}" == "light.setup" ]; then
