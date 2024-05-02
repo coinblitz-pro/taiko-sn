@@ -14,7 +14,7 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --l2.suggestedFeeRecipient ${PROPOSER_SUGGESTED_FEE_RECIPIENT}
     --proverEndpoints ${PROVER_ENDPOINTS}
     --tierFee.optimistic ${PROPOSER_BLOCK_PROPOSAL_FEE:-1}
-    --tierFee.sgx ${BLOCK_PROPOSAL_FEE}
+    --tierFee.sgx ${BLOCK_PROPOSAL_FEE:-1}
     --tierFee.maxPriceBumps ${PROPOSER_MAX_TIER_FEE_BUMPS:-1}
     --l1.blobAllowed
     --epoch.interval ${PROPOSER_EPOCH_INTERVAL:-0}"
@@ -73,4 +73,4 @@ if [ -n "$TX_SEND_TIMEOUT" ]; then
     ARGS="${ARGS} --tx.sendTimeout ${TX_SEND_TIMEOUT}"
 fi
 
-taiko-client proposer "${ARGS}"
+taiko-client proposer ${ARGS}

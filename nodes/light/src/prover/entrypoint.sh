@@ -77,4 +77,4 @@ if [ -n "$TX_SEND_TIMEOUT" ]; then
     ARGS="${ARGS} --tx.sendTimeout ${TX_SEND_TIMEOUT}"
 fi
 
-taiko-client prover "${ARGS}"
+taiko-client prover ${ARGS}

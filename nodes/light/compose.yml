@@ -43,6 +43,8 @@ services:
   proposer-private:
     image: lagunovsky/taiko-client:hekla-proposer
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       - PROVER_ENDPOINTS=http://prover:9876
     <<: *logging
@@ -50,6 +52,8 @@ services:
   proposer-public:
     image: lagunovsky/taiko-client:hekla-proposer
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       - PROVER_ENDPOINTS=${PROPOSER_PUBLIC_PROVER_ENDPOINTS}
       - PROPOSER_EPOCH_INTERVAL=1s
