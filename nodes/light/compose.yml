@@ -10,6 +10,8 @@ services:
     image: lagunovsky/raiko:DC4sv2
     restart: unless-stopped
     command: --config-path=/etc/raiko/config.sgx.json
+    env_file:
+      - .env
     devices:
       - "/dev/sgx_enclave:/dev/sgx_enclave"
       - "/dev/sgx_provision:/dev/sgx_provision"
@@ -27,6 +29,8 @@ services:
   pccs:
     image: lagunovsky/pccs:DC4sv2
     restart: unless-stopped
+    env_file:
+      - .env
     volumes:
       - ./data/pccs/default.json:/opt/intel/pccs/config/default.json
       - ./data/pccs/file.crt:/opt/intel/pccs/ssl_key/file.crt
@@ -36,6 +40,8 @@ services:
   prover:
     image: lagunovsky/taiko-client:hekla-prover
     restart: unless-stopped
+    env_file:
+      - .env
     depends_on:
       - pccs
     <<: *logging
