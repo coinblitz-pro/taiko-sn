@@ -2,16 +2,17 @@
 
 set -e
 
-DIR=$(dirname "$(realpath "$0")")
+location=$(dirname "$(realpath "$0")")
+destination="${1:-.}"
 
-bootstrap_path="./data/raiko/config/bootstrap.json"
+bootstrap_path="${destination}/data/raiko/config/bootstrap.json"
 if [[ ! -f "$bootstrap_path" ]]; then
     docker compose run --rm raiko --init
 fi
 V3_QUOTE_BYTES=$(jq -r '.quote' < "$bootstrap_path")
 
 read -r -e -p "PRIVATE_KEY: " -i "${PRIVATE_KEY}" PRIVATE_KEY
-cd "$DIR/../../../taiko-mono/packages/protocol"
+cd "$location/../upstream/taiko-mono/packages/protocol"
 
 pnpm install
 pnpm compile
@@ -29,4 +30,4 @@ cd -
 SGX_INSTANCE_ID=$(echo "${registration_process}" | grep -oP -m 1 'InstanceAdded\(id: \K\d+')
 
 echo "Registered SGX instance with ID: $SGX_INSTANCE_ID"
-sed -i "s/RAIKO_SGX_INSTANCE_ID=/RAIKO_SGX_INSTANCE_ID=$SGX_INSTANCE_ID/g" .env
+sed -i "s/RAIKO_SGX_INSTANCE_ID=/RAIKO_SGX_INSTANCE_ID=$SGX_INSTANCE_ID/g" "${destination}/.env"
