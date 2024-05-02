@@ -4,6 +4,7 @@ set -e
 
 location=$(dirname "$(realpath "$0")")
 destination="${1:-.}"
+upstream="$location/../../../upstream"
 
 bootstrap_path="${destination}/data/raiko/config/bootstrap.json"
 if [[ ! -f "$bootstrap_path" ]]; then
@@ -12,7 +13,7 @@ fi
 V3_QUOTE_BYTES=$(jq -r '.quote' < "$bootstrap_path")
 
 read -r -e -p "PRIVATE_KEY: " -i "${PRIVATE_KEY}" PRIVATE_KEY
-cd "$location/../../upstream/taiko-mono/packages/protocol"
+cd "$upstream/taiko-mono/packages/protocol"
 
 pnpm install
 pnpm compile

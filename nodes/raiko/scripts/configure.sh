@@ -4,6 +4,7 @@ set -e
 
 location=$(dirname "$(realpath "$0")")
 destination="${1:-.}"
+upstream="$location/../../../upstream"
 
 if [[ ! -f "${destination}/.env" ]]; then
   cp "${destination}/.env.example" "${destination}/.env"
@@ -25,7 +26,7 @@ fi
 
 config_path="${destination}/data/pccs/default.json"
 if [[ ! -f "$config_path" ]]; then
-  cp "$location/../../upstream/raiko/docker/pccs-defaut-example.json" "${config_path}"
+  cp "$upstream/raiko/docker/pccs-defaut-example.json" "${config_path}"
   chmod 644 "${config_path}"
 
   read -r -e -p "API_KEY: " -i "${API_KEY}" API_KEY
