@@ -5,15 +5,16 @@ x-logging: &logging
       max-file: "3"
 
 services:
-  l2_execution_engine:
+  engine:
     image: us-docker.pkg.dev/evmchain/hekla/taiko-geth:hekla
     restart: unless-stopped
     pull_policy: always
     stop_grace_period: 3m
+    env_file:
+      - .env
     volumes:
       - ./data/taiko-geth:/data/taiko-geth
     ports:
-      - "${PORT_L2_EXECUTION_ENGINE_METRICS}:6060"
       - "${PORT_L2_EXECUTION_ENGINE_AUTH}:8551"
       - "${PORT_L2_EXECUTION_ENGINE_HTTP}:8545"
       - "${PORT_L2_EXECUTION_ENGINE_WS}:8546"
@@ -21,7 +22,7 @@ services:
       - "${PORT_L2_EXECUTION_ENGINE_P2P}:${PORT_L2_EXECUTION_ENGINE_P2P}/udp"
     command: |
       --taiko
-      --networkid ${CHAIN_ID}
+      --networkid ${CHAIN_ID:-167009}
       --gcmode ${GCMODE:-archive}
       --syncmode ${SYNCMODE:-snap}
       --datadir /data/taiko-geth
@@ -43,73 +44,28 @@ services:
       --metrics
       --metrics.expensive
       --metrics.addr "0.0.0.0"
+      --nodiscover ${NODISCOVER:-false}
     <<: *logging
     profiles:
       - engine
-      - prover
-      - proposer
 
-  taiko_client_driver:
-    image: us-docker.pkg.dev/evmchain/hekla/taiko-client:hekla
+  driver:
+    image: lagunovsky/taiko-client:hekla-driver
     restart: unless-stopped
     pull_policy: always
     depends_on:
-      - l2_execution_engine
-    env_file:
-      - .env
-    volumes:
-      - ./data/taiko-geth:/data/taiko-geth
-      - ./src/simple-taiko-node/script:/script
-    entrypoint:
-      - /bin/sh
-      - -c
-      - "/script/start-driver.sh"
-    <<: *logging
-    profiles:
       - engine
-      - prover
-      - proposer
-
-  taiko_client_prover_relayer:
-    image: us-docker.pkg.dev/evmchain/hekla/taiko-client:hekla
-    restart: unless-stopped
-    pull_policy: always
-    depends_on:
-      - l2_execution_engine
-      - taiko_client_driver
-    ports:
-      - "${PORT_PROVER_SERVER}:9876"
     env_file:
       - .env
-    volumes:
-      - ./src/simple-taiko-node/script:/script
-    entrypoint:
-      - /bin/sh
-      - -c
-      - "/script/start-prover-relayer.sh"
-    profiles:
-      - prover
-    <<: *logging
-
-  taiko_client_proposer:
-    image: us-docker.pkg.dev/evmchain/hekla/taiko-client:hekla
-    restart: unless-stopped
-    pull_policy: always
-    depends_on:
-      - l2_execution_engine
-      - taiko_client_driver
-    env_file:
-      - .env
+    environment:
+      - L2_ENDPOINT_WS=ws://engine:8546
+      - L2_ENDPOINT_AUTH=http://engine:8551
     volumes:
       - ./data/taiko-geth:/data/taiko-geth
       - ./src/simple-taiko-node/script:/script
-    entrypoint:
-      - /bin/sh
-      - -c
-      - "/script/start-proposer.sh"
-    profiles:
-      - proposer
     <<: *logging
+    profiles:
+      - l2_execution_engine
 
   prometheus:
     image: prom/prometheus:latest
@@ -117,8 +73,8 @@ services:
     ports:
       - ${PORT_PROMETHEUS}:9090
     depends_on:
-      - l2_execution_engine
-      - taiko_client_driver
+      - engine
+      - driver
     volumes:
       - ./src/simple-taiko-node/docker/prometheus/l2:/etc/prometheus
       - prometheus_data:/prometheus
@@ -135,8 +91,8 @@ services:
     ports:
       - ${PORT_GRAFANA}:3000
     depends_on:
-      - l2_execution_engine
-      - taiko_client_driver
+      - engine
+      - driver
       - prometheus
     environment:
       - GF_PATHS_CONFIG=/etc/grafana/custom/settings.ini
