@@ -29,6 +29,8 @@ elif [ "${action}" == "prover.up" ]; then
 fi
 
 if [ "${action}" == "ubuntu.prepare" ]; then
+  set -e pipefail
+
   read -r -e -p "Swap size: " -i "$(free -g | grep -oP '\d+' | head -n 1)g" SWAP_SIZE
 
   fallocate -l "${SWAP_SIZE}" /swapfile
