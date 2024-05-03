@@ -45,6 +45,10 @@ services:
       --metrics.expensive
       --metrics.addr "0.0.0.0"
       ${GETH_ARGS}
+    networks:
+      default:
+        - aliases:
+            - l2_execution_engine
     <<: *logging
     profiles:
       - engine
@@ -79,8 +83,6 @@ services:
     command:
       - --log.level=debug
       - --config.file=/etc/prometheus/prometheus.yml
-    extra_hosts:
-      - "l2_execution_engine:engine"
     profiles:
       - grafana
     <<: *logging
