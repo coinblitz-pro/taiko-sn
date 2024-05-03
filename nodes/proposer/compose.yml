@@ -1,0 +1,24 @@
+x-logging: &logging
+  logging:
+    driver: local
+    options:
+      max-size: 5m
+      max-file: "10"
+services:
+  proposer-zkpool:
+    image: lagunovsky/taiko-client:hekla-proposer
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - PROVER_ENDPOINTS=http://taiko-a7-prover.zkpool.io
+      - PROPOSER_EPOCH_INTERVAL=10000ms
+  proposer-community:
+    image: lagunovsky/taiko-client:hekla-proposer
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - PROVER_ENDPOINTS=${PROPOSER_PUBLIC_PROVER_ENDPOINTS}
+      - PROPOSER_EPOCH_INTERVAL=2000ms
+    <<: *logging
