@@ -9,6 +9,8 @@ services:
   prover:
     image: lagunovsky/taiko-client:hekla-prover
     restart: unless-stopped
+    ports:
+      - "${PROVER_PORT:-9876}:9876"
     depends_on:
       - raiko
     <<: *logging
