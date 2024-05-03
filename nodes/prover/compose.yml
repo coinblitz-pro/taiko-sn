@@ -2,8 +2,8 @@ x-logging: &logging
   logging:
     driver: local
     options:
-      max-size: 10m
-      max-file: "5"
+      max-size: 5m
+      max-file: "10"
 
 services:
   raiko:
@@ -46,7 +46,7 @@ services:
       - raiko
     <<: *logging
 
-  proposer-private:
+  proposer:
     image: lagunovsky/taiko-client:hekla-proposer
     restart: unless-stopped
     env_file:
@@ -56,15 +56,3 @@ services:
     depends_on:
       - prover
     <<: *logging
-
-  proposer-public:
-    image: lagunovsky/taiko-client:hekla-proposer
-    restart: unless-stopped
-    env_file:
-      - .env
-    environment:
-      - PROVER_ENDPOINTS=${PROPOSER_PUBLIC_PROVER_ENDPOINTS}
-      - PROPOSER_EPOCH_INTERVAL=1s
-    <<: *logging
-
-
