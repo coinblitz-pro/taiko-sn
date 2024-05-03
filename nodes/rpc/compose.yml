@@ -65,7 +65,7 @@ services:
       - ./src/simple-taiko-node/script:/script
     <<: *logging
     profiles:
-      - l2_execution_engine
+      - engine
 
   prometheus:
     image: prom/prometheus:latest
