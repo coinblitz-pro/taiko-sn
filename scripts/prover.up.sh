@@ -1,4 +1,4 @@
 #!/bin/bash
 
-path="nodes/light"
+path="nodes/prover"
 docker compose --project-directory "${path}" up -d

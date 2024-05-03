@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path="nodes/light"
+path="nodes/prover"
 
 rsync -a nodes/raiko/data ${path}
 
