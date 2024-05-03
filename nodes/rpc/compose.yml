@@ -48,7 +48,7 @@ services:
     networks:
       default:
         - aliases:
-            - l2_execution_engine
+          - l2_execution_engine
     <<: *logging
     profiles:
       - engine
