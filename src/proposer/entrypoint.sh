@@ -13,11 +13,12 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --l1.proposerPrivKey ${PRIVATE_KEY}
     --l2.suggestedFeeRecipient ${PROPOSER_SUGGESTED_FEE_RECIPIENT}
     --proverEndpoints ${PROVER_ENDPOINTS}
-    --tierFee.optimistic ${PROPOSER_BLOCK_PROPOSAL_FEE:-1}
-    --tierFee.sgx ${BLOCK_PROPOSAL_FEE:-1}
+    --tierFee.optimistic ${PROPOSER_BLOCK_PROPOSAL_FEE_TIER_1:-1}
+    --tierFee.sgx ${PROPOSER_BLOCK_PROPOSAL_FEE_TIER_2:-1}
+    --tierFee.sgxAndZkvm ${PROPOSER_BLOCK_PROPOSAL_FEE_TIER_3:-1}
     --tierFee.maxPriceBumps ${PROPOSER_MAX_TIER_FEE_BUMPS:-1}
     --l1.blobAllowed
-    --epoch.interval ${PROPOSER_EPOCH_INTERVAL:-0}"
+    --epoch.interval ${PROPOSER_EPOCH_INTERVAL:-12}"
 
 if [ -n "$TXPOOL_LOCALS" ]; then
     ARGS="${ARGS} --txPool.localsOnly"
