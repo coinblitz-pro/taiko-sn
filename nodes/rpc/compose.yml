@@ -47,7 +47,7 @@ services:
       ${GETH_ARGS}
     networks:
       default:
-        - aliases:
+        aliases:
           - l2_execution_engine
     <<: *logging
     profiles:
@@ -111,6 +111,3 @@ services:
 volumes:
   prometheus_data:
   grafana_data:
-
-networks:
-  default:
