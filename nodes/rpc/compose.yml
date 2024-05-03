@@ -20,6 +20,8 @@ services:
       - "${PORT_L2_EXECUTION_ENGINE_WS}:8546"
       - "${PORT_L2_EXECUTION_ENGINE_P2P}:${PORT_L2_EXECUTION_ENGINE_P2P}"
       - "${PORT_L2_EXECUTION_ENGINE_P2P}:${PORT_L2_EXECUTION_ENGINE_P2P}/udp"
+    extra_hosts:
+      - l2_execution_engine
     command: |
       --taiko
       --networkid ${CHAIN_ID:-167009}
