@@ -27,3 +27,19 @@ if [ "${action}" == "prover.setup" ]; then
 elif [ "${action}" == "prover.up" ]; then
   scripts/prover.up.sh
 fi
+
+if [ "${action}" == "ubuntu.prepare" ]; then
+  read -r -e -p "Swap size: " -i "$(free -g | grep -oP '\d+' | head -n 1)" SWAP_SIZE
+
+  fallocate -l "${SWAP_SIZE}" /swapfile
+  chmod 600 /swapfile
+  mkswap /swapfile
+  swapon /swapfile
+  echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+
+  sysctl vm.swappiness=5
+  echo 'vm.swappiness=5' | sudo tee -a /etc/sysctl.conf
+
+  sysctl vm.vfs_cache_pressure=50
+  echo 'vm.vfs_cache_pressure=50' | sudo tee -a /etc/sysctl.conf
+fi
