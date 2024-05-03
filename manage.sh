@@ -29,7 +29,7 @@ elif [ "${action}" == "prover.up" ]; then
 fi
 
 if [ "${action}" == "ubuntu.prepare" ]; then
-  read -r -e -p "Swap size: " -i "$(free -g | grep -oP '\d+' | head -n 1)" SWAP_SIZE
+  read -r -e -p "Swap size: " -i "$(free -g | grep -oP '\d+' | head -n 1)g" SWAP_SIZE
 
   fallocate -l "${SWAP_SIZE}" /swapfile
   chmod 600 /swapfile
