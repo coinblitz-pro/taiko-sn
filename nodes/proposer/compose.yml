@@ -12,7 +12,7 @@ services:
       - .env
     environment:
       - PROVER_ENDPOINTS=http://taiko-a7-prover.zkpool.io
-      - PROPOSER_EPOCH_INTERVAL=10000ms
+      - PROPOSER_EPOCH_INTERVAL=12500ms
   proposer-community:
     image: lagunovsky/taiko-client:hekla-proposer
     restart: unless-stopped
@@ -21,4 +21,5 @@ services:
     environment:
       - PROVER_ENDPOINTS=${PROPOSER_PUBLIC_PROVER_ENDPOINTS}
       - PROPOSER_EPOCH_INTERVAL=2000ms
+      - EPOCH_MAX_CALL_ATTEMPTS=4
     <<: *logging
