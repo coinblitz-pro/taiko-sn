@@ -74,7 +74,7 @@ services:
       - engine
       - driver
     volumes:
-      - ./src/simple-taiko-node/docker/prometheus/l2:/etc/prometheus
+      - ./../../upstream/simple-taiko-node/docker/prometheus/l2:/etc/prometheus
       - prometheus_data:/prometheus
     command:
       - --log.level=debug
@@ -97,8 +97,8 @@ services:
       - GF_PATHS_PROVISIONING=/etc/grafana/custom/provisioning
       - GF_LOG_LEVEL=WARN
     volumes:
-      - ./src/simple-taiko-node/docker/grafana/custom/settings.ini:/etc/grafana/custom/settings.ini
-      - ./src/simple-taiko-node/docker/grafana/custom/l2/provisioning/:/etc/grafana/custom/provisioning/
+      - ./../../upstream/simple-taiko-node/docker/grafana/custom/settings.ini:/etc/grafana/custom/settings.ini
+      - ./../../upstream/simple-taiko-node/docker/grafana/custom/l2/provisioning/:/etc/grafana/custom/provisioning/
       - grafana_data:/var/lib/grafana
     profiles:
       - grafana
