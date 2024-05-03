@@ -44,7 +44,7 @@ services:
       --metrics
       --metrics.expensive
       --metrics.addr "0.0.0.0"
-      --nodiscover ${NODISCOVER:-false}
+      ${GETH_ARGS}
     <<: *logging
     profiles:
       - engine
