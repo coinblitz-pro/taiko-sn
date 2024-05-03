@@ -17,7 +17,7 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --tierFee.sgx ${PROPOSER_BLOCK_PROPOSAL_FEE_TIER_2:-1}
     --tierFee.maxPriceBumps ${PROPOSER_MAX_TIER_FEE_BUMPS:-1}
     --l1.blobAllowed
-    --epoch.interval ${PROPOSER_EPOCH_INTERVAL:-12}"
+    --epoch.interval ${PROPOSER_EPOCH_INTERVAL:-12s}"
 
 if [ -n "$TXPOOL_LOCALS" ]; then
     ARGS="${ARGS} --txPool.localsOnly"
