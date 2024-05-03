@@ -70,8 +70,6 @@ services:
   prometheus:
     image: prom/prometheus:latest
     restart: unless-stopped
-    ports:
-      - ${PORT_PROMETHEUS}:9090
     depends_on:
       - engine
       - driver
