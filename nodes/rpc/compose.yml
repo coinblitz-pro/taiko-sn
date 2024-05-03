@@ -44,7 +44,7 @@ services:
       --metrics
       --metrics.expensive
       --metrics.addr "0.0.0.0"
-      ${GETH_ARGS}
+      ${GETH_ADDITIONAL_ARGS}
     networks:
       default:
         aliases:
