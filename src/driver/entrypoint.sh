@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e pipefail
+
+ARGS="--l1.ws ${L1_ENDPOINT_WS}
+      --l1.beacon ${L1_BEACON_HTTP}
+      --l2.ws ${L2_ENDPOINT_WS}
+      --l2.auth ${L2_ENDPOINT_AUTH}
+      --taikoL1 ${TAIKO_L1_ADDRESS:-0x79C9109b764609df928d16fC4a91e9081F7e87DB}
+      --taikoL2 ${TAIKO_L2_ADDRESS:-0x1670090000000000000000000000000000010001}
+      --jwtSecret /data/taiko-geth/geth/jwtsecret"
+
+if [ "$P2P_ENABLE_SYNC" = "true" ]; then
+    ARGS="${ARGS} --p2p.sync"
+    ARGS="${ARGS} --p2p.checkPointSyncUrl ${P2P_CHECKPOINT_SYNC_URL}"
+fi
+
+taiko-client driver ${ARGS}
