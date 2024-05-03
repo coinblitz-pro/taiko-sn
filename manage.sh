@@ -22,8 +22,8 @@ elif [ "${action}" == "raiko.setup" ]; then
   scripts/light-node.setup.sh
 fi
 
-if [ "${action}" == "light.setup" ]; then
-  scripts/light.setup.sh
-elif [ "${action}" == "light.up" ]; then
-  scripts/light.up.sh
+if [ "${action}" == "prover.setup" ]; then
+  scripts/prover.setup.sh
+elif [ "${action}" == "prover.up" ]; then
+  scripts/prover.up.sh
 fi
