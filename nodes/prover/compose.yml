@@ -9,6 +9,8 @@ services:
   prover:
     image: lagunovsky/taiko-client:hekla-prover
     restart: unless-stopped
+    env_file:
+      - .env
     ports:
       - "${PROVER_PORT:-9876}:9876"
     <<: *logging
@@ -16,6 +18,8 @@ services:
   proposer:
     image: lagunovsky/taiko-client:hekla-proposer
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       - PROVER_ENDPOINTS=http://prover:9876
       - PROPOSER_EPOCH_INTERVAL=2000ms
