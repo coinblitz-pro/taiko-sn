@@ -18,6 +18,7 @@ services:
     restart: unless-stopped
     environment:
       - PROVER_ENDPOINTS=http://prover:9876
+      - PROPOSER_EPOCH_INTERVAL=2000ms
     depends_on:
       - prover
     <<: *logging
