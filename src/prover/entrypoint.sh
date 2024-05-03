@@ -14,7 +14,7 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --assignmentHookAddress ${ASSIGNMENT_HOOK_L1_ADDRESS:-0x9e640a6aadf4f664CF467B795c31332f44AcBe6c}
     --l1.proverPrivKey ${PRIVATE_KEY}
     --prover.capacity ${PROVER_CAPACITY:-1}
-    --raiko.host ${SGX_RAIKO_HOST:-http://raiko:8080}
+    --raiko.host ${RAIKO_HOST}
     --minTierFee.optimistic ${MIN_ACCEPTABLE_PROOF_FEE:-1}
     --minTierFee.sgx ${MIN_ACCEPTABLE_PROOF_FEE:-1}
     --minTierFee.sgxAndZkvm ${MIN_ACCEPTABLE_PROOF_FEE:-1}
