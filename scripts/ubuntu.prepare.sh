@@ -20,6 +20,6 @@ if ! command -v docker > /dev/null 2>&1; then
   curl https://get.docker.com | sh
   if [[ $USER != "root" ]]; then
     sudo usermod -aG docker "$USER"
-    echo "You need logging out and back in again"
+    echo "⚠️ You need logging out and back in again"
   fi
 fi
