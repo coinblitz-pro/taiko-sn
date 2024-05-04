@@ -21,6 +21,8 @@ if [ "${action}" == "raiko.prepare" ]; then
   nodes/raiko/scripts/prepare.sh
 elif [ "${action}" == "raiko.setup" ]; then
   scripts/raiko.setup.sh
+elif [ "${action}" == "raiko.register" ]; then
+  scripts/raiko.register.sh
 fi
 
 if [ "${action}" == "prover.setup" ]; then
