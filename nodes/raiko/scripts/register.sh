@@ -51,4 +51,4 @@ cd -
 SGX_INSTANCE_ID=$(echo "${registration_process}" | grep -oP -m 1 'register sgx instance index: \K\d+')
 
 echo "Registered SGX instance with ID: $SGX_INSTANCE_ID"
-sed -i "s/RAIKO_SGX_INSTANCE_ID=/RAIKO_SGX_INSTANCE_ID=$SGX_INSTANCE_ID/g" "${destination}/.env"
+sed -i "s/^RAIKO_SGX_INSTANCE_ID=/RAIKO_SGX_INSTANCE_ID=$SGX_INSTANCE_ID/g" "${destination}/.env"
