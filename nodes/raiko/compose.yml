@@ -20,6 +20,7 @@ services:
       - SGX_INSTANCE_ID=${RAIKO_SGX_INSTANCE_ID}
     depends_on:
       - pccs
+
   pccs:
     build:
       context: ./src/raiko
