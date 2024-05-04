@@ -23,7 +23,7 @@ services:
     environment:
       - PROVER_ENDPOINTS=http://prover:9876
       - PROPOSER_EPOCH_INTERVAL=2000ms
-      - EPOCH_GAP=1m
+      - PROPOSER_EPOCH_GAP=2m
     depends_on:
       - prover
     <<: *logging
