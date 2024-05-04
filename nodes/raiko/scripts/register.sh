@@ -8,6 +8,8 @@ upstream="$location/../../../upstream"
 timestamp=$(date +%s)
 
 priv_key_path="${destination}/data/raiko/secrets/priv.key"
+bootstrap_path="${destination}/data/raiko/config/bootstrap.json"
+
 if [[ -f "$priv_key_path" ]]; then
   read -r -e -p "Do you want register again? (Y/n) " PRIVATE_KEY
   if [ "$RESP" = "N" ] || [ "$RESP" = "n" ]; then
@@ -16,10 +18,10 @@ if [[ -f "$priv_key_path" ]]; then
 
   docker compose --project-directory "${destination}" down
   sudo mv "${priv_key_path}" "${priv_key_path}.${timestamp}"
+  sudo mv "${bootstrap_path}" "${bootstrap_path}.${timestamp}"
   cp "${destination}/.env" "${destination}/.env.${timestamp}"
 fi
 
-bootstrap_path="${destination}/data/raiko/config/bootstrap.json"
 if [[ ! -f "$bootstrap_path" ]]; then
     docker compose --project-directory "${destination}" run --rm raiko --init
 fi
