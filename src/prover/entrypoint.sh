@@ -43,6 +43,8 @@ fi
 
 if [ -n "$TX_GAS_LIMIT" ]; then
     ARGS="${ARGS} --tx.gasLimit ${TX_GAS_LIMIT}"
+else
+    ARGS="${ARGS} --tx.gasLimit 3000000"
 fi
 
 if [ -n "$TX_MIN_BASEFEE" ]; then

@@ -30,7 +30,7 @@ fi
 
 # TXMGR Settings
 if [ -n "$TX_FEE_LIMIT_MULTIPLIER" ]; then
-        ARGS="${ARGS} --tx.feeLimitMultiplier ${TX_FEE_LIMIT_MULTIPLIER}"
+  ARGS="${ARGS} --tx.feeLimitMultiplier ${TX_FEE_LIMIT_MULTIPLIER}"
 fi
 
 if [ -n "$TX_FEE_LIMIT_THRESHOLD" ]; then
@@ -39,6 +39,8 @@ fi
 
 if [ -n "$TX_GAS_LIMIT" ]; then
     ARGS="${ARGS} --tx.gasLimit ${TX_GAS_LIMIT}"
+else
+    ARGS="${ARGS} --tx.gasLimit 3000000"
 fi
 
 if [ -n "$TX_MIN_BASEFEE" ]; then
