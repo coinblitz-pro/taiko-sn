@@ -15,7 +15,7 @@ if [[ -f "$priv_key_path" ]]; then
   fi
 
   docker compose --project-directory "${destination}" down
-  mv "${priv_key_path}" "${priv_key_path}.${timestamp}"
+  sudo mv "${priv_key_path}" "${priv_key_path}.${timestamp}"
   cp "${destination}/.env" "${destination}/.env.${timestamp}"
 fi
 
