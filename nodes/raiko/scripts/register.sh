@@ -17,6 +17,7 @@ if [[ -f "$priv_key_path" ]]; then
   fi
 
   docker compose --project-directory "${destination}" down
+  docker compose --project-directory "${destination}" pull
   sudo mv "${priv_key_path}" "${priv_key_path}.${timestamp}"
   sudo mv "${bootstrap_path}" "${bootstrap_path}.${timestamp}"
   sed -i "s/^RAIKO_SGX_INSTANCE_ID=/RAIKO_SGX_INSTANCE_ID=\n\n# ${timestamp} RAIKO_SGX_INSTANCE_ID=/g" "${destination}/.env"
