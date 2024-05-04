@@ -3,6 +3,7 @@
 location=$(dirname "$(realpath "$0")")
 destination="${1:-.}"
 upstream="$location/../../../upstream"
+timestamp=$(date +%s)
 
 priv_key_path="${destination}/data/data/raiko/secrets/priv.key"
 if [[ ! -f "$priv_key_path" ]]; then
@@ -12,7 +13,8 @@ if [[ ! -f "$priv_key_path" ]]; then
   fi
 
   docker compose --project-directory "${destination}" down
-  mv "${priv_key_path}" "${priv_key_path}.$(date +%s)"
+  mv "${priv_key_path}" "${priv_key_path}.${timestamp}"
+  cp "${destination}/.env" "${destination}/.env.${timestamp}"
 fi
 
 bootstrap_path="${destination}/data/raiko/config/bootstrap.json"
