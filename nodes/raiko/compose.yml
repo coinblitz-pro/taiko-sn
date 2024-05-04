@@ -1,7 +1,7 @@
 services:
   raiko:
     build:
-      context: ./src/raiko
+      context: ../../upstream/raiko
       dockerfile: Dockerfile
     image: lagunovsky/raiko:${RAIKO_VERSION:-latest}
     restart: unless-stopped
@@ -10,7 +10,7 @@ services:
       - "/dev/sgx_enclave:/dev/sgx_enclave"
       - "/dev/sgx_provision:/dev/sgx_provision"
     volumes:
-      - /var/log/raiko:/var/log/raiko
+      - ./logs/raiko:/var/log/raiko
       - ./data/gramine:/root/.config/gramine
       - ./data/raiko:/root/.config/raiko
     ports:
@@ -23,7 +23,7 @@ services:
 
   pccs:
     build:
-      context: ./src/raiko
+      context: ../../upstream/raiko
       dockerfile: Dockerfile.pccs
     image: lagunovsky/pccs:${PCCS_VERSION:-latest}
     restart: unless-stopped
