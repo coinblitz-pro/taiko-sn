@@ -11,9 +11,11 @@ if [ "${action}" == "help" ]; then
   echo "Actions:"
   echo "  ubuntu.prepare  Prepare the ubuntu environment"
   echo "  raiko.prepare   Prepare the environment for running Raiko"
-  echo "  raiko.setup     Setup a Raiko node"
-  echo "  prover.setup    Setup a light node"
-  echo "  prover.up       Start a light node"
+  echo "  raiko.setup     Setup a raiko"
+  echo "  raiko.register  Register a raiko"
+  echo "  raiko.up        Start a raiko"
+  echo "  prover.setup    Setup a prover"
+  echo "  prover.up       Start a prover"
   exit 0
 fi
 
@@ -23,12 +25,18 @@ elif [ "${action}" == "raiko.setup" ]; then
   scripts/raiko.setup.sh
 elif [ "${action}" == "raiko.register" ]; then
   scripts/raiko.register.sh
+elif [ "${action}" == "raiko.up" ]; then
+  scripts/raiko.up.sh
+elif [ "${action}" == "raiko" ]; then
+  cd "nodes/raiko"
 fi
 
 if [ "${action}" == "prover.setup" ]; then
   scripts/prover.setup.sh
 elif [ "${action}" == "prover.up" ]; then
   scripts/prover.up.sh
+elif [ "${action}" == "prover" ]; then
+  cd "nodes/prover"
 fi
 
 if [ "${action}" == "ubuntu.prepare" ]; then
