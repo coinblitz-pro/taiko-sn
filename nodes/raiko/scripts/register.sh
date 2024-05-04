@@ -11,13 +11,17 @@ priv_key_path="${destination}/data/raiko/secrets/priv.key"
 bootstrap_path="${destination}/data/raiko/config/bootstrap.json"
 
 if [[ -f "$priv_key_path" ]]; then
-  read -r -e -p "Do you want register again? (Y/n) " PRIVATE_KEY
-  if [ "$RESP" = "N" ] || [ "$RESP" = "n" ]; then
+  read -r -e -p "Do you want register again? (Y/n) " REGISTER_AGAIN
+  if [ "$REGISTER_AGAIN" = "N" ] || [ "$REGISTER_AGAIN" = "n" ]; then
     exit 0
   fi
 
+  read -r -e -p "Do you want to pull the latest images? (Y/n) " PULL_AGAIN
+  if [ "$PULL_AGAIN" != "N" ] && [ "$PULL_AGAIN" != "n" ]; then
+    docker compose --project-directory "${destination}" pull
+  fi
+
   docker compose --project-directory "${destination}" down
-  docker compose --project-directory "${destination}" pull
   sudo mv "${priv_key_path}" "${priv_key_path}.${timestamp}"
   sudo mv "${bootstrap_path}" "${bootstrap_path}.${timestamp}"
   sed -i "s/^RAIKO_SGX_INSTANCE_ID=/RAIKO_SGX_INSTANCE_ID=\n\n# ${timestamp} RAIKO_SGX_INSTANCE_ID=/g" "${destination}/.env"
