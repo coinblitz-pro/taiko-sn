@@ -4,6 +4,17 @@ location=$(dirname "$(realpath "$0")")
 destination="${1:-.}"
 upstream="$location/../../../upstream"
 
+priv_key_path="${destination}/data/data/raiko/secrets/priv.key"
+if [[ ! -f "$priv_key_path" ]]; then
+  read -r -e -p "Do you want register again? (Y/n) " PRIVATE_KEY
+  if [ "$RESP" = "N" ] || [ "$RESP" = "n" ]; then
+    exit 0
+  fi
+
+  docker compose --project-directory "${destination}" down
+  mv "${priv_key_path}" "${priv_key_path}.$(date +%s)"
+fi
+
 bootstrap_path="${destination}/data/raiko/config/bootstrap.json"
 if [[ ! -f "$bootstrap_path" ]]; then
     docker compose --project-directory "${destination}" run --rm raiko --init
