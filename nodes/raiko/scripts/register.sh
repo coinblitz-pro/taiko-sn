@@ -8,7 +8,7 @@ upstream="$location/../../../upstream"
 timestamp=$(date +%s)
 
 priv_key_path="${destination}/data/raiko/secrets/priv.key"
-if [[ ! -f "$priv_key_path" ]]; then
+if [[ -f "$priv_key_path" ]]; then
   read -r -e -p "Do you want register again? (Y/n) " PRIVATE_KEY
   if [ "$RESP" = "N" ] || [ "$RESP" = "n" ]; then
     exit 0
