@@ -33,12 +33,14 @@ fi
 V3_QUOTE_BYTES=$(jq -r '.quote' < "$bootstrap_path")
 
 read -r -e -p "PRIVATE_KEY: " -i "${PRIVATE_KEY}" PRIVATE_KEY
+read -r -e -p "HOLESKY_RPC: " HOLESKY_RPC
+
 cd "$upstream/taiko-mono/packages/protocol"
 
 pnpm install
 pnpm compile
 
-if ! registration_process=$(PRIVATE_KEY=${PRIVATE_KEY} FORK_URL=https://ethereum-holesky-rpc.publicnode.com ./script/config_dcap_sgx_verifier.sh --quote "${V3_QUOTE_BYTES}")
+if ! registration_process=$(PRIVATE_KEY=${PRIVATE_KEY} FORK_URL=${HOLESKY_RPC} ./script/config_dcap_sgx_verifier.sh --quote "${V3_QUOTE_BYTES}")
 then
   echo "$registration_process"
   echo "Failed to register SGX instance"
