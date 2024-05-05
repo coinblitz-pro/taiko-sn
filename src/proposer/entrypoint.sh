@@ -36,6 +36,8 @@ fi
 
 if [ -n "$TX_FEE_LIMIT_THRESHOLD" ]; then
     ARGS="${ARGS} --tx.feeLimitThreshold ${TX_FEE_LIMIT_THRESHOLD}"
+else
+    ARGS="${ARGS} --tx.feeLimitThreshold 25000000" # 0.025 ETH
 fi
 
 if [ -n "$TX_GAS_LIMIT" ]; then
