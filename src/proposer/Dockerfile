@@ -4,9 +4,7 @@ RUN apk update && apk add --no-cache --update gcc musl-dev linux-headers git mak
 
 WORKDIR /taiko-client
 COPY --from=upstream ./taiko-client .
-
-ARG GIT_COMMIT
-RUN GIT_COMMIT=${GIT_COMMIT} make build
+RUN make build
 
 
 FROM alpine:latest
