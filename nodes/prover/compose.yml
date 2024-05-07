@@ -22,8 +22,8 @@ services:
       - .env
     environment:
       - PROVER_ENDPOINTS=http://prover:9876
-      - PROPOSER_EPOCH_INTERVAL=2000ms
-      - PROPOSER_EPOCH_GAP=2m
+      - PROPOSER_EPOCH_INTERVAL=${PROPOSER_EPOCH_INTERVAL:-1000ms}
+      - PROPOSER_EPOCH_GAP=${PROPOSER_EPOCH_GAP:-60m}
     depends_on:
       - prover
     <<: *logging
