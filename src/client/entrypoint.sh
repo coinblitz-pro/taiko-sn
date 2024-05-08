@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e pipefail
+set -eo pipefail
 
 action=${1}
 
