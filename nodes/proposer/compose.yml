@@ -7,8 +7,10 @@ x-logging: &logging
 
 services:
   proposer-zkpool:
-    image: lagunovsky/taiko-client:hekla-proposer
+    image: lagunovsky/taiko-client:hekla
     restart: unless-stopped
+    command:
+      - proposer
     env_file:
       - .env
     environment:
@@ -17,8 +19,10 @@ services:
       - EPOCH_GAP=1m
 
   proposer-community:
-    image: lagunovsky/taiko-client:hekla-proposer
+    image: lagunovsky/taiko-client:hekla
     restart: unless-stopped
+    command:
+      - proposer
     env_file:
       - .env
     environment:

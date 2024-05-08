@@ -7,8 +7,10 @@ x-logging: &logging
 
 services:
   prover:
-    image: lagunovsky/taiko-client:hekla-prover
+    image: lagunovsky/taiko-client:hekla
     restart: unless-stopped
+    command:
+      - proposer
     env_file:
       - .env
     ports:
@@ -16,8 +18,10 @@ services:
     <<: *logging
 
   proposer:
-    image: lagunovsky/taiko-client:hekla-proposer
+    image: lagunovsky/taiko-client:hekla
     restart: unless-stopped
+    command:
+      - proposer
     env_file:
       - .env
     environment:

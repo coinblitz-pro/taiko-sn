@@ -54,9 +54,11 @@ services:
       - engine
 
   driver:
-    image: lagunovsky/taiko-client:hekla-driver
+    image: lagunovsky/taiko-client:hekla
     restart: unless-stopped
     pull_policy: always
+    command:
+      - driver
     depends_on:
       - engine
     env_file:
