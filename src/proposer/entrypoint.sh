@@ -18,7 +18,10 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --tierFee.maxPriceBumps ${PROPOSER_MAX_TIER_FEE_BUMPS:-1}
     --l1.blobAllowed
     --epoch.interval ${PROPOSER_EPOCH_INTERVAL:-12s}
-    --epoch.gap ${PROPOSER_EPOCH_GAP:-2m}"
+    --epoch.gap ${PROPOSER_EPOCH_GAP:-2m}
+    --tx.gasLimit ${TX_GAS_LIMIT:-3000000}
+    --tx.resubmissionTimeout ${TX_RESUBMISSION:-100s}
+    --tx.sendTimeout ${TX_SEND_TIMEOUT:-15s}"
 
 if [ -n "$TXPOOL_LOCALS" ]; then
     ARGS="${ARGS} --txPool.localsOnly"
@@ -30,20 +33,6 @@ if [ -n "$BLOCK_BUILDER_TIP" ]; then
 fi
 
 # TXMGR Settings
-if [ -n "$TX_FEE_LIMIT_MULTIPLIER" ]; then
-  ARGS="${ARGS} --tx.feeLimitMultiplier ${TX_FEE_LIMIT_MULTIPLIER}"
-fi
-
-if [ -n "$TX_FEE_LIMIT_THRESHOLD" ]; then
-    ARGS="${ARGS} --tx.feeLimitThreshold ${TX_FEE_LIMIT_THRESHOLD}"
-fi
-
-if [ -n "$TX_GAS_LIMIT" ]; then
-    ARGS="${ARGS} --tx.gasLimit ${TX_GAS_LIMIT}"
-else
-    ARGS="${ARGS} --tx.gasLimit 3000000"
-fi
-
 if [ -n "$TX_MIN_BASEFEE" ]; then
     ARGS="${ARGS} --tx.minBaseFee ${TX_MIN_BASEFEE}"
 fi
@@ -64,16 +53,8 @@ if [ -n "$TX_RECEIPT_QUERY" ]; then
     ARGS="${ARGS} --tx.receiptQueryInterval ${TX_RECEIPT_QUERY}"
 fi
 
-if [ -n "$TX_RESUBMISSION" ]; then
-    ARGS="${ARGS} --tx.resubmissionTimeout ${TX_RESUBMISSION}"
-fi
-
 if [ -n "$TX_SAFE_ABORT_NONCE_TOO_LOW" ]; then
     ARGS="${ARGS} --tx.safeAbortNonceTooLowCount ${TX_SAFE_ABORT_NONCE_TOO_LOW}"
-fi
-
-if [ -n "$TX_SEND_TIMEOUT" ]; then
-    ARGS="${ARGS} --tx.sendTimeout ${TX_SEND_TIMEOUT}"
 fi
 
 taiko-client proposer ${ARGS}
