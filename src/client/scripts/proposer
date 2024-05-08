@@ -20,8 +20,8 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --epoch.interval ${PROPOSER_EPOCH_INTERVAL:-12s}
     --epoch.gap ${PROPOSER_EPOCH_GAP:-2m}
     --tx.gasLimit ${TX_GAS_LIMIT:-3000000}
-    --tx.resubmissionTimeout ${TX_RESUBMISSION:-100s}
-    --tx.sendTimeout ${TX_SEND_TIMEOUT:-15s}"
+    --tx.resubmissionTimeout ${TX_RESUBMISSION:-90s}
+    --tx.sendTimeout ${TX_SEND_TIMEOUT:-90s}"
 
 if [ -n "$TXPOOL_LOCALS" ]; then
     ARGS="${ARGS} --txPool.localsOnly"
