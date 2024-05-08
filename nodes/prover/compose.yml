@@ -9,8 +9,7 @@ services:
   prover:
     image: lagunovsky/taiko-client:hekla
     restart: unless-stopped
-    command:
-      - proposer
+    command: prover
     env_file:
       - .env
     ports:
@@ -20,8 +19,7 @@ services:
   proposer:
     image: lagunovsky/taiko-client:hekla
     restart: unless-stopped
-    command:
-      - proposer
+    command: proposer
     env_file:
       - .env
     environment:
