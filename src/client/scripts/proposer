@@ -11,7 +11,6 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --assignmentHookAddress ${ASSIGNMENT_HOOK_L1_ADDRESS:-0x9e640a6aadf4f664CF467B795c31332f44AcBe6c}
     --jwtSecret ${L2_JWT_SECRET}
     --l1.proposerPrivKey ${PRIVATE_KEY}
-    --l2.suggestedFeeRecipient ${PROPOSER_SUGGESTED_FEE_RECIPIENT}
     --proverEndpoints ${PROVER_ENDPOINTS}
     --tierFee.optimistic ${PROPOSER_BLOCK_PROPOSAL_FEE_TIER_1:-1}
     --tierFee.sgx ${PROPOSER_BLOCK_PROPOSAL_FEE_TIER_2:-1}
@@ -30,6 +29,10 @@ fi
 
 if [ -n "$BLOCK_BUILDER_TIP" ]; then
     ARGS="${ARGS} --l1.blockBuilderTip ${BLOCK_BUILDER_TIP}"
+fi
+
+if [ -n "$PROPOSER_SUGGESTED_FEE_RECIPIENT" ]; then
+    ARGS="${ARGS} --l2.suggestedFeeRecipient ${PROPOSER_SUGGESTED_FEE_RECIPIENT}"
 fi
 
 # TXMGR Settings
