@@ -29,4 +29,6 @@ services:
       - TX_GAS_LIMIT=${TX_GAS_LIMIT:-3000000}
     depends_on:
       - prover
+    profiles:
+      - proposer
     <<: *logging
