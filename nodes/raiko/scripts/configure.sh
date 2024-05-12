@@ -7,7 +7,7 @@ upstream="$location/../../../upstream"
 if [[ ! -f "${destination}/.env" ]]; then
   cp "${destination}/.env.example" "${destination}/.env"
   preferred=""
-  if [[ $USER == "azureuser" ]]; then preferred="DC4sv2-cc0e8d8"; fi
+  if [[ $USER == "azureuser" ]]; then preferred="DC4sv2-0c5442b"; fi
   read -r -e -p "RAIKO_VERSION: " -i "${preferred}" RAIKO_VERSION
   sed -i "s/RAIKO_VERSION=/RAIKO_VERSION=$RAIKO_VERSION/g" "${destination}/.env"
   read -r -e -p "PCCS_VERSION: " -i "${preferred}" PCCS_VERSION
