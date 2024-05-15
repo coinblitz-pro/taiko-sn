@@ -1,10 +1,3 @@
-x-logging: &logging
-  logging:
-    driver: local
-    options:
-      max-size: 5m
-      max-file: "10"
-
 services:
   prover:
     image: lagunovsky/taiko-client:hekla
@@ -14,21 +7,8 @@ services:
       - .env
     ports:
       - "${PROVER_PORT:-9876}:9876"
-    <<: *logging
-
-  proposer:
-    image: lagunovsky/taiko-client:hekla
-    restart: unless-stopped
-    command: proposer
-    env_file:
-      - .env
-    environment:
-      - PROVER_ENDPOINTS=http://prover:9876
-      - PROPOSER_EPOCH_INTERVAL=${PROPOSER_EPOCH_INTERVAL:-1000ms}
-      - PROPOSER_EPOCH_GAP=${PROPOSER_EPOCH_GAP:-60m}
-      - TX_GAS_LIMIT=${TX_GAS_LIMIT:-3000000}
-    depends_on:
-      - prover
-    profiles:
-      - proposer
-    <<: *logging
+    logging:
+      driver: local
+      options:
+        max-size: 5m
+        max-file: "10"
