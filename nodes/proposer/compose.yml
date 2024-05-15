@@ -1,33 +1,13 @@
-x-logging: &logging
-  logging:
-    driver: local
-    options:
-      max-size: 5m
-      max-file: "10"
-
 services:
-  proposer-zkpool:
+  proposer:
     image: lagunovsky/taiko-client:hekla
     restart: unless-stopped
     command:
       - proposer
     env_file:
       - .env
-    environment:
-      - PROVER_ENDPOINTS=http://taiko-a7-prover.zkpool.io
-      - PROPOSER_EPOCH_INTERVAL=12500ms
-      - EPOCH_GAP=1m
-
-  proposer-community:
-    image: lagunovsky/taiko-client:hekla
-    restart: unless-stopped
-    command:
-      - proposer
-    env_file:
-      - .env
-    environment:
-      - PROVER_ENDPOINTS=${PROPOSER_PUBLIC_PROVER_ENDPOINTS}
-      - PROPOSER_EPOCH_INTERVAL=1000ms
-      - EPOCH_MAX_CALL_ATTEMPTS=4
-      - EPOCH_GAP=1m
-    <<: *logging
+    logging:
+      driver: local
+      options:
+        max-size: 5m
+        max-file: "10"
