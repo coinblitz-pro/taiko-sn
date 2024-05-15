@@ -3,6 +3,8 @@ services:
     image: lagunovsky/taiko-client:hekla
     restart: unless-stopped
     command: prover
+    networks:
+      - taiko
     env_file:
       - .env
     ports:
@@ -12,3 +14,7 @@ services:
       options:
         max-size: 5m
         max-file: "10"
+
+networks:
+  taiko:
+    external: true

@@ -4,6 +4,8 @@ services:
     restart: unless-stopped
     command:
       - proposer
+    networks:
+      - taiko
     env_file:
       - .env
     logging:
@@ -11,3 +13,7 @@ services:
       options:
         max-size: 5m
         max-file: "10"
+
+networks:
+  taiko:
+    external: true
