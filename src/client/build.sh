@@ -2,6 +2,6 @@
 
 docker buildx build \
   --platform=linux/amd64,linux/arm64 \
-  --build-context upstream=../../upstream/taiko-client \
+  --build-context upstream=../../upstream/taiko-mono \
   --push -t lagunovsky/taiko-client:hekla \
   .

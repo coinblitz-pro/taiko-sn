@@ -1,14 +1,7 @@
-[submodule "upstream/taiko-mono"]
-	path = upstream/taiko-mono
-	url = https://github.com/taikoxyz/taiko-mono.git
-[submodule "upstream/raiko"]
-	path = upstream/raiko
-	url = https://github.com/taikoxyz/raiko
-	branch = taiko/alpha-7
 [submodule "upstream/simple-taiko-node"]
 	path = upstream/simple-taiko-node
 	url = https://github.com/taikoxyz/simple-taiko-node.git
-[submodule "upstream/taiko-client"]
-	path = upstream/taiko-client
-	url = git@github.com:coinblitz-pro/taiko-client.git
+[submodule "upstream/taiko-mono"]
+	path = upstream/taiko-mono
+	url = git@github.com:coinblitz-pro/taiko-mono.git
 	branch = hekla

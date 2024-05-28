@@ -41,6 +41,7 @@ services:
       --port ${PORT_L2_EXECUTION_ENGINE_P2P}
       --discovery.port ${PORT_L2_EXECUTION_ENGINE_P2P}
       --maxpeers ${MAXPEERS:-50}
+      --maxpendpeers ${MAXPENDPEERS:-0}
       --metrics
       --metrics.expensive
       --metrics.addr "0.0.0.0"
