@@ -1,14 +1,8 @@
-x-logging:
-  logging: &logging
+x-logging: &logging
+  logging:
     options:
       max-size: 10m
       max-file: "3"
-
-logging:
-  driver: local
-  options:
-    max-size: 5m
-    max-file: "10"
 
 services:
   proposer:
@@ -17,8 +11,7 @@ services:
     command: proposer
     env_file:
       - .env
-    logging:
-      <<: *logging
+    <<: *logging
 
   prover:
     image: lagunovsky/taiko-client:hekla
@@ -26,5 +19,4 @@ services:
     command: prover
     env_file:
       - .env
-    logging:
-      <<: *logging
+    <<: *logging
