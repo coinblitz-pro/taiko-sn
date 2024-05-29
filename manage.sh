@@ -7,9 +7,10 @@ action=${1:-help}
 if [ "${action}" == "help" ]; then
   echo "Usage: $0 <action>"
   echo "Actions:"
-  echo "  ubuntu.prepare  Prepare the ubuntu environment"
-  echo "  prover.setup    Setup a prover"
-  echo "  prover.up       Start a prover"
+  echo "  ubuntu.prepare   Prepare the ubuntu environment"
+  echo "  prover.setup     Setup a prover"
+  echo "  prover.up        Start a prover"
+  echo "  proposer.setup   Setup a proposer"
   exit 0
 fi
 
@@ -17,6 +18,10 @@ if [ "${action}" == "prover.setup" ]; then
   scripts/prover.setup.sh
 elif [ "${action}" == "prover.up" ]; then
   scripts/prover.up.sh
+fi
+
+if [ "${action}" == "proposer.setup" ]; then
+  scripts/proposer.setup.sh
 fi
 
 if [ "${action}" == "ubuntu.prepare" ]; then
