@@ -16,7 +16,10 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --raiko.host ${RAIKO_HOST}
     --minTierFee.optimistic ${MIN_ACCEPTABLE_PROOF_FEE:-1}
     --minTierFee.sgx ${MIN_ACCEPTABLE_PROOF_FEE:-1}
-    --minTierFee.sgxAndZkvm ${MIN_ACCEPTABLE_PROOF_FEE:-1}"
+    --minTierFee.sgxAndZkvm ${MIN_ACCEPTABLE_PROOF_FEE:-1}
+    --tx.advantageGasBump ${TX_ADVANTAGE_GAS_BUMP:-10}
+    --tx.resubmissionTimeout ${TX_RESUBMISSION_TIMEOUT:-90s}
+    --tx.sendTimeout ${TX_SEND_TIMEOUT:-900s}"
 
 if [ -n "$PROVER_TOKEN_ALLOWANCE" ]; then
   ARGS="${ARGS} --prover.allowance ${PROVER_TOKEN_ALLOWANCE}"
