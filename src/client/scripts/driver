@@ -12,7 +12,7 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
 
 if [ "$P2P_ENABLE_SYNC" = "true" ]; then
   ARGS="${ARGS} --p2p.sync"
-  ARGS="${ARGS} --p2p.checkPointSyncUrl ${P2P_CHECKPOINT_SYNC_URL}"
+  ARGS="${ARGS} --p2p.checkPointSyncUrl ${P2P_SYNC_URL}"
 fi
 
 taiko-client driver ${ARGS}
