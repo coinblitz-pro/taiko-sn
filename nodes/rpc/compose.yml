@@ -68,6 +68,7 @@ services:
     environment:
       - L2_ENDPOINT_WS=ws://engine:8546
       - L2_ENDPOINT_AUTH=http://engine:8551
+      - ACCESS_KEY=${CLIENT_ACCESS_KEY}
     volumes:
       - ./data/taiko-geth:/data/taiko-geth
       - ./src/simple-taiko-node/script:/script
