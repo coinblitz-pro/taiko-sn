@@ -119,4 +119,5 @@ volumes:
   grafana_data: {}
 
 networks:
-  taiko: {}
+  taiko:
+    name: taiko
