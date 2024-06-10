@@ -15,4 +15,4 @@ services:
 
 networks:
   taiko:
-    external: true
+    name: taiko

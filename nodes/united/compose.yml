@@ -11,6 +11,8 @@ services:
     command: proposer
     env_file:
       - .env
+    networks:
+      - taiko
     <<: *logging
 
   prover:
@@ -19,4 +21,10 @@ services:
     command: prover
     env_file:
       - .env
+    networks:
+      - taiko
     <<: *logging
+
+networks:
+  taiko:
+    name: taiko
