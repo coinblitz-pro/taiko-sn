@@ -48,6 +48,7 @@ services:
       --gpo.defaultprice "10000000"
       ${GETH_ADDITIONAL_ARGS}
     networks:
+      taiko: {}
       default:
         aliases:
           - l2_execution_engine
@@ -114,5 +115,8 @@ services:
     <<: *logging
 
 volumes:
-  prometheus_data:
-  grafana_data:
+  prometheus_data: {}
+  grafana_data: {}
+
+networks:
+  taiko: {}

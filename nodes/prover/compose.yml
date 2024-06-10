@@ -1,6 +1,6 @@
 services:
   prover:
-    image: lagunovsky/taiko-client:hekla
+    image: lagunovsky/taiko-client:${CLIENT_TAG}
     restart: unless-stopped
     command: prover
     networks:

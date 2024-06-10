@@ -1,9 +1,8 @@
 services:
   proposer:
-    image: lagunovsky/taiko-client:hekla
+    image: lagunovsky/taiko-client:${CLIENT_TAG}
     restart: unless-stopped
-    command:
-      - proposer
+    command: proposer
     networks:
       - taiko
     env_file:
