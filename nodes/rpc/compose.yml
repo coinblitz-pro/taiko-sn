@@ -120,4 +120,4 @@ volumes:
 
 networks:
   taiko:
-    name: taiko
+    external: true
