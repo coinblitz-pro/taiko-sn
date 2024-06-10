@@ -21,6 +21,6 @@ RUN apk add --no-cache ca-certificates libstdc++ bash
 COPY --from=builder /build/packages/taiko-client/bin/taiko-client /usr/local/bin/
 
 ADD entrypoint.sh /entrypoint.sh
-ADD scripts /scripts
+ADD commands /commands
 
 ENTRYPOINT ["/entrypoint.sh"]

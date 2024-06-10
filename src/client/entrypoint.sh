@@ -5,11 +5,11 @@ set -eo pipefail
 action=${1}
 
 if [ "${action}" == "driver" ]; then
-  /scripts/driver
+  /commands/driver
 elif [ "${action}" == "proposer" ]; then
-  /scripts/proposer
+  /commands/proposer
 elif [ "${action}" == "prover" ]; then
-  /scripts/prover
+  /commands/prover
 else
   echo "Usage: $0 <action>"
   echo "Actions:"
