@@ -5,11 +5,11 @@ set -e pipefail
 ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --l2.http ${L2_ENDPOINT_HTTP}
     --l2.auth ${L2_ENDPOINT_AUTH}
-    --taikoL1 ${TAIKO_L1_ADDRESS:-0x79C9109b764609df928d16fC4a91e9081F7e87DB}
-    --taikoL2 ${TAIKO_L2_ADDRESS:-0x1670090000000000000000000000000000010001}
-    --taikoToken ${TAIKO_TOKEN_L1_ADDRESS:-0x6490E12d480549D333499236fF2Ba6676C296011}
-    --assignmentHookAddress ${ASSIGNMENT_HOOK_L1_ADDRESS:-0x9e640a6aadf4f664CF467B795c31332f44AcBe6c}
-    --jwtSecret ${L2_JWT_SECRET}
+    --taikoL1 ${TAIKO_L1_ADDRESS}
+    --taikoL2 ${TAIKO_L2_ADDRESS}
+    --taikoToken ${TAIKO_TOKEN_L1_ADDRESS}
+    --assignmentHookAddress ${ASSIGNMENT_HOOK_L1_ADDRESS}
+    --jwtSecret ${L2_JWT_SECRET:-/data/taiko-geth/geth/jwtsecret}
     --l1.proposerPrivKey ${PRIVATE_KEY}
     --proverEndpoints ${PROVER_ENDPOINTS}
     --tierFee.optimistic ${PROPOSER_BLOCK_PROPOSAL_FEE_TIER_1:-1}
