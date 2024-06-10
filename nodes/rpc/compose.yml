@@ -22,7 +22,7 @@ services:
       - "${PORT_L2_EXECUTION_ENGINE_P2P}:${PORT_L2_EXECUTION_ENGINE_P2P}/udp"
     command: |
       --taiko
-      --networkid ${CHAIN_ID:-167009}
+      --networkid ${CHAIN_ID}
       --gcmode ${GCMODE:-archive}
       --syncmode ${SYNCMODE:-snap}
       --datadir /data/taiko-geth
