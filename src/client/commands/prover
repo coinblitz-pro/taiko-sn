@@ -11,21 +11,13 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --taikoToken ${TAIKO_TOKEN_L1_ADDRESS}
     --assignmentHookAddress ${ASSIGNMENT_HOOK_L1_ADDRESS}
     --l1.proverPrivKey ${PRIVATE_KEY}
-    --prover.capacity ${PROVER_CAPACITY:-1}
     --raiko.host ${RAIKO_HOST}
-    --minTierFee.optimistic ${MIN_ACCEPTABLE_PROOF_FEE:-1}
-    --minTierFee.sgx ${MIN_ACCEPTABLE_PROOF_FEE:-1}
-    --minTierFee.sgxAndZkvm ${MIN_ACCEPTABLE_PROOF_FEE:-1}
     --tx.advantageGasBump ${TX_ADVANTAGE_GAS_BUMP:-10}
     --tx.resubmissionTimeout ${TX_RESUBMISSION_TIMEOUT:-90s}
     --tx.sendTimeout ${TX_SEND_TIMEOUT:-900s}"
 
 if [ -n "$PROVER_TOKEN_ALLOWANCE" ]; then
   ARGS="${ARGS} --prover.allowance ${PROVER_TOKEN_ALLOWANCE}"
-fi
-
-if [ -n "$PROVER_MIN_ETH_BALANCE" ]; then
-  ARGS="${ARGS} --prover.minEthBalance ${PROVER_MIN_ETH_BALANCE}"
 fi
 
 if [ -n "$PROVER_MIN_TKO_BALANCE" ]; then
