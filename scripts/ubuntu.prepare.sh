@@ -9,10 +9,10 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
-sysctl vm.swappiness=5
+sudo sysctl vm.swappiness=5
 echo 'vm.swappiness=5' | sudo tee -a /etc/sysctl.conf
 
-sysctl vm.vfs_cache_pressure=50
+sudo sysctl vm.vfs_cache_pressure=50
 echo 'vm.vfs_cache_pressure=50' | sudo tee -a /etc/sysctl.conf
 
 sudo apt update && sudo apt upgrade -y
