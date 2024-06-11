@@ -12,8 +12,8 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --jwtSecret ${L2_JWT_SECRET:-/data/taiko-geth/geth/jwtsecret}
     --l1.proposerPrivKey ${PRIVATE_KEY}
     --proverEndpoints ${PROVER_ENDPOINTS}
-    --tierFee.optimistic ${PROPOSER_BLOCK_PROPOSAL_FEE_TIER_1:-1}
-    --tierFee.sgx ${PROPOSER_BLOCK_PROPOSAL_FEE_TIER_2:-1}
+    --tierFee.optimistic ${TIER_FEE_OPTIMISTIC:-1}
+    --tierFee.sgx ${TIER_FEE_SGX:-1}
     --tierFee.maxPriceBumps ${PROPOSER_MAX_TIER_FEE_BUMPS:-1}
     --epoch.interval ${PROPOSER_EPOCH_INTERVAL:-12s}
     --epoch.gap ${PROPOSER_EPOCH_GAP:-2m}
