@@ -3,7 +3,6 @@ services:
     image: lagunovsky/taiko-client:${CLIENT_TAG}
     restart: unless-stopped
     command: proposer
-    init: true
     networks:
       - taiko
     env_file:
