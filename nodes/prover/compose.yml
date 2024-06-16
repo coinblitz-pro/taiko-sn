@@ -19,10 +19,10 @@ services:
         max-size: 5m
         max-file: "10"
 
-networks:
-  taiko:
-    external: true
-
 secrets:
   keyring_secret:
     environment: KEYRING_SECRET
+
+networks:
+  taiko:
+    external: true

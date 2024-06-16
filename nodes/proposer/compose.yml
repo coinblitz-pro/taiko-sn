@@ -8,12 +8,18 @@ services:
     env_file:
       - .env
     environment:
-      - KEYRING_SECRET=${KEYRING_SECRET}
+      - KEYRING_SECRET_FILE=/run/secrets/keyring_secret
+    secrets:
+      - keyring_secret
     logging:
       driver: local
       options:
         max-size: 5m
         max-file: "10"
+
+secrets:
+  keyring_secret:
+    environment: KEYRING_SECRET
 
 networks:
   taiko:
