@@ -7,6 +7,8 @@ services:
       - taiko
     env_file:
       - .env
+    environment:
+      - KEYRING_SECRET=${KEYRING_SECRET}
     ports:
       - "${PROVER_PORT:-9876}:${PROVER_PORT:-9876}"
     logging:
