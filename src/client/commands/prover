@@ -9,7 +9,6 @@ ARGS="--l1.ws ${L1_ENDPOINT_WS}
     --taikoL1 ${TAIKO_L1_ADDRESS}
     --taikoL2 ${TAIKO_L2_ADDRESS}
     --taikoToken ${TAIKO_TOKEN_L1_ADDRESS}
-    --assignmentHookAddress ${ASSIGNMENT_HOOK_L1_ADDRESS}
     --l1.proverPrivKey ${PRIVATE_KEY}
     --prover.capacity ${PROVER_CAPACITY:-1}
     --raiko.host ${RAIKO_HOST}
