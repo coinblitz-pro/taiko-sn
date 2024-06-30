@@ -45,7 +45,6 @@ services:
       --metrics
       --metrics.expensive
       --metrics.addr "0.0.0.0"
-      --gpo.defaultprice "10000000"
       ${GETH_ADDITIONAL_ARGS:-}
     networks:
       taiko: {}
