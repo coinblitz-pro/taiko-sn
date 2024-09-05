@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path="nodes/proposer"
+path="services/proposer"
 
 if [[ ! -f "${path}/.env" ]]; then
   envsubst < "${path}/.env.template" > "${path}/.env"
