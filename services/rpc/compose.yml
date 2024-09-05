@@ -66,8 +66,8 @@ services:
     env_file:
       - .env
     environment:
-      - L2_ENDPOINT_WS=ws://engine:8546
-      - L2_ENDPOINT_AUTH=http://engine:8551
+      - L2_WS=ws://engine:8546
+      - L2_AUTH=http://engine:8551
       - JWT_SECRET=/data/taiko-geth/geth/jwtsecret
       - ACCESS_KEY=${CLIENT_ACCESS_KEY}
     volumes:
