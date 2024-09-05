@@ -86,7 +86,7 @@ services:
       - ./../../upstream/simple-taiko-node/docker/prometheus/l2:/etc/prometheus
       - prometheus_data:/prometheus
     command:
-      - --log.level=debug
+      - --log.level=warn
       - --config.file=/etc/prometheus/prometheus.yml
     profiles:
       - grafana
@@ -102,7 +102,6 @@ services:
       - driver
       - prometheus
     environment:
-      - GF_PATHS_CONFIG=/etc/grafana/custom/settings.ini
       - GF_PATHS_PROVISIONING=/etc/grafana/custom/provisioning
       - GF_LOG_LEVEL=WARN
     volumes:
