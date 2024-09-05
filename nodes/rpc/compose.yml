@@ -6,9 +6,9 @@ x-logging: &logging
 
 services:
   engine:
-    image: us-docker.pkg.dev/evmchain/images/taiko-geth:${GETH_TAG}
+    <<: *logging
+    image: lagunovsky/taiko-geth:${GETH_TAG}
     restart: unless-stopped
-    pull_policy: always
     stop_grace_period: 3m
     env_file:
       - .env
@@ -45,21 +45,20 @@ services:
       --metrics
       --metrics.expensive
       --metrics.addr "0.0.0.0"
-      --gpo.defaultprice ${GPO_DEFAULTPRICE:-100000000}
-      ${GETH_ADDITIONAL_ARGS:-}
+      --gpo.defaultprice ${GPO_DEFAULTPRICE:-50000000}
+      ${TAIKO_GETH_ADDITIONAL_ARGS:-}
     networks:
       taiko: {}
       default:
         aliases:
           - l2_execution_engine
-    <<: *logging
     profiles:
       - engine
 
   driver:
+    <<: *logging
     image: lagunovsky/taiko-client:${CLIENT_TAG}
     restart: unless-stopped
-    pull_policy: always
     command:
       - driver
     depends_on:
@@ -69,15 +68,15 @@ services:
     environment:
       - L2_ENDPOINT_WS=ws://engine:8546
       - L2_ENDPOINT_AUTH=http://engine:8551
+      - JWT_SECRET=/data/taiko-geth/geth/jwtsecret
       - ACCESS_KEY=${CLIENT_ACCESS_KEY}
     volumes:
       - ./data/taiko-geth:/data/taiko-geth
-      - ./src/simple-taiko-node/script:/script
-    <<: *logging
     profiles:
       - engine
 
   prometheus:
+    <<: *logging
     image: prom/prometheus:latest
     restart: unless-stopped
     depends_on:
@@ -91,9 +90,9 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
     profiles:
       - grafana
-    <<: *logging
 
   grafana:
+    <<: *logging
     image: grafana/grafana:latest
     restart: unless-stopped
     ports:
@@ -112,7 +111,6 @@ services:
       - grafana_data:/var/lib/grafana
     profiles:
       - grafana
-    <<: *logging
 
 volumes:
   prometheus_data: {}
