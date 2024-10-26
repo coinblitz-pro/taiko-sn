@@ -7,7 +7,7 @@ x-logging: &logging
 services:
   engine:
     <<: *logging
-    image: lagunovsky/taiko-geth:${GETH_TAG}
+    image: lagunovsky/taiko-geth:${TAIKO_GETH_TAG}
     restart: unless-stopped
     stop_grace_period: 3m
     env_file:
@@ -57,7 +57,7 @@ services:
 
   driver:
     <<: *logging
-    image: lagunovsky/taiko-client:${CLIENT_TAG}
+    image: lagunovsky/taiko-client:${TAIKO_CLIENT_TAG}
     restart: unless-stopped
     command:
       - driver
@@ -69,7 +69,6 @@ services:
       - L2_WS=ws://engine:8546
       - L2_AUTH=http://engine:8551
       - JWT_SECRET=/data/taiko-geth/geth/jwtsecret
-      - ACCESS_KEY=${CLIENT_ACCESS_KEY}
     volumes:
       - ./data/taiko-geth:/data/taiko-geth
     profiles:
